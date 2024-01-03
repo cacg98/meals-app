@@ -1,0 +1,10 @@
+@import '../../../styles.scss';
+
+.bg {
+    background-color: $viridian-300;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
