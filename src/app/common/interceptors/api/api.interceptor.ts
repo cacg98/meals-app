@@ -7,8 +7,12 @@ import { AuthTokensService } from '../../services/auth-tokens/auth-tokens.servic
 import * as authEndpoints from '../../endpoints/auth';
 
 export const apiInterceptor: HttpInterceptorFn = (req, next) => {
-	
-	if (req.url === authEndpoints.LOGIN) {
+	const authUrls = [
+		authEndpoints.REGISTER,
+		authEndpoints.LOGIN
+	];
+
+	if (authUrls.includes(req.url)) {
 		return next(req);
 	}
 
