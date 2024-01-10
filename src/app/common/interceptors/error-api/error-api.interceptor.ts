@@ -24,7 +24,9 @@ export const errorApiInterceptor: HttpInterceptorFn = (req, next) => {
 						return next(reqClone);
 					}),
 					catchError(() => {
-            			inject(Router).navigateByUrl('/');
+						localStorage.removeItem('accessToken');
+						localStorage.removeItem('refreshToken');
+            			inject(Router).navigateByUrl('login');
 						return EMPTY;
 					}),
 					finalize(() => authTokensService.isRefreshing = false),

@@ -14,7 +14,7 @@ export class AuthService {
   }
 
   register(email: string, password: string) {
-	  return this._httpClient.post<any>(authEndpoints.REGISTER, { email, password });
+	  return this._httpClient.post<authResponses.ITokens>(authEndpoints.REGISTER, { email, password });
   }
 
   login(email: string, password: string) {

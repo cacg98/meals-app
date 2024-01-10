@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -8,6 +9,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { AuthService } from '../../common/services/auth/auth.service';
+import { AuthTokensService } from '../../common/services/auth-tokens/auth-tokens.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +21,8 @@ import { AuthService } from '../../common/services/auth/auth.service';
 export class LoginComponent {
   private formBuilder = inject(FormBuilder)
   private authSerive = inject(AuthService)
+  private authTokensSerive = inject(AuthTokensService)
+  private router = inject(Router)
 
   profileForm = this.formBuilder.nonNullable.group({
     email: ['cacg98@gmail.com', [Validators.required, Validators.email]],
@@ -45,7 +49,8 @@ export class LoginComponent {
 
     observable.subscribe({
       next: res => {
-        console.log(res)
+        this.authTokensSerive.updateTokens(res.accessToken, res.refreshToken)
+        this.router.navigateByUrl('home')
       },
       error: err => {
         console.log(err)
