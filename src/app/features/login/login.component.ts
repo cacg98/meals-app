@@ -4,13 +4,15 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { AuthService } from '../../common/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule, MatButtonModule],
+  imports: [FormsModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatIconModule, MatButtonToggleModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -31,7 +33,8 @@ export class LoginComponent {
     return this.profileForm.get('password')
   }
 
-  isSignUp: boolean = true
+  isSignUp: boolean = false
+  hide: boolean = true
 
   onSubmit() {
     const { email, password } = this.profileForm.value

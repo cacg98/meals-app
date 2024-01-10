@@ -1,5 +1,5 @@
-<div class="bg">
-    <div class="container">
+<div class="background">
+    <div class="card">
         <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
             <mat-form-field>
                 <mat-label>Enter your email</mat-label>
@@ -10,12 +10,21 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Enter your password</mat-label>
-                <input type="password" matInput formControlName="password">
+                <input [type]="hide ? 'password' : 'text'" matInput formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>              
                 @if (password!.invalid) {
                   <mat-error>{{ 'You must enter a value' }}</mat-error>
                 }
             </mat-form-field>
             <button type="submit" mat-flat-button color="primary" [disabled]="profileForm.invalid">Submit</button>
         </form>
+        <div class="container-sign">
+            <mat-button-toggle-group [(ngModel)]="isSignUp" name="sign" aria-label="Sign">
+                <mat-button-toggle [value]="true">Sign Up</mat-button-toggle>
+                <mat-button-toggle [value]="false">Sign In</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
     </div>
 </div>
