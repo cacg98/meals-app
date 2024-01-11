@@ -13,14 +13,14 @@
 </mat-toolbar>
 
 <swiper
+  [config]="config"
+  [effect]="'cards'"
   (slideChange)="onSlideChange()"
-  [navigation]="true"
-  [pagination]="{ clickable: true }"
 >
-  <ng-template swiperSlide>Slide 1</ng-template>
-  <ng-template swiperSlide>Slide 2</ng-template>
-  <ng-template swiperSlide>Slide 3</ng-template>
-  <ng-template swiperSlide>Slide 4</ng-template>
-  <ng-template swiperSlide>Slide 5</ng-template>
-  <ng-template swiperSlide>Slide 6</ng-template>
+  <ng-template swiperSlide><div class="test">Slide 1</div></ng-template>
+  <ng-template swiperSlide><div class="test">Slide 2</div></ng-template>
+  <ng-template swiperSlide><div class="test">Slide 3</div></ng-template>
+  <ng-template swiperSlide><div class="test">Slide 4</div></ng-template>
+  <ng-template swiperSlide><div class="test">Slide 5</div></ng-template>
+  <ng-template swiperSlide><div class="test">Slide 6</div></ng-template>
 </swiper>
