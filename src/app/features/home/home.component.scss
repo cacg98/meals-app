@@ -1,3 +1,5 @@
+@import '../../../assets/scss/colors.scss';
+
 .spacer {
     flex: 1 1 auto;
 }
@@ -11,5 +13,5 @@
     height: 100%;
     width: 100%;
     border-radius: 1rem;
-    background-color: red;
+    background-color: $primary-50;
 }

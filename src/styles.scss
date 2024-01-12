@@ -35,6 +35,10 @@ $meals-app-theme: mat.define-light-theme((
 @include mat.all-component-themes($meals-app-theme);
 
 /* You can add global styles to this file, and also import other style files */
+@import '../node_modules/swiper/swiper.scss';
+@import '../node_modules/swiper/modules/navigation/navigation.scss';
+@import '../node_modules/swiper/modules/pagination/pagination.scss';
+@import '../node_modules/swiper/modules/effect-cards/effect-cards.scss';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -6,11 +6,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { SwiperModule } from 'swiper/angular';
 
-import 'swiper/scss';
-import 'swiper/scss/navigation';
-import 'swiper/scss/pagination';
-import 'swiper/scss/effect-cards';
-
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Pagination, EffectCards, SwiperOptions } from 'swiper';
 
