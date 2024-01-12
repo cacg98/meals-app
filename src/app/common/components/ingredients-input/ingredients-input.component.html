@@ -1,0 +1,22 @@
+<mat-form-field class="example-chip-list">
+  <mat-label>Add ingredient</mat-label>
+  <mat-chip-grid #chipGrid aria-label="Enter ingredient">
+    @for (ingredient of ingredients; track ingredient; let i = $index) {
+      <mat-chip-row
+        (removed)="remove(ingredient, i)"
+        [editable]="true"
+        (edited)="edit(ingredient, i, $event)"
+        [aria-description]="'press enter to edit ' + ingredient">
+        {{ingredient}}
+        <button matChipRemove [attr.aria-label]="'remove ' + ingredient">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    }
+    <input placeholder="New ingredient..."
+           [matChipInputFor]="chipGrid"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="true"
+           (matChipInputTokenEnd)="add($event)"/>
+  </mat-chip-grid>
+</mat-form-field>

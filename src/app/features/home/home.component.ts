@@ -4,6 +4,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
+import { IngredientsInputComponent } from '../../common/components/ingredients-input/ingredients-input.component';
+
 import { SwiperModule } from 'swiper/angular';
 
 // import Swiper core and required modules
@@ -15,7 +17,7 @@ SwiperCore.use([Navigation, Pagination, EffectCards]);
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, SwiperModule],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, SwiperModule, IngredientsInputComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -26,6 +28,8 @@ export class HomeComponent {
     pagination: { clickable: true },
     cardsEffect: { slideShadows: true }
   };
+
+  ingredients: string[] = [];
 
   onSlideChange() {
     console.log('slide change');

@@ -12,6 +12,11 @@
     </button>
 </mat-toolbar>
 
+<div class="search">
+  <app-ingredients-input (changeIngredients)="ingredients = $event" />
+  <button mat-stroked-button color="primary" [disabled]="!ingredients.length">Search recipe</button>
+</div>
+
 <swiper
   [config]="config"
   [effect]="'cards'"
