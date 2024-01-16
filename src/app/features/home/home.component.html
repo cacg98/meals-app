@@ -14,18 +14,25 @@
 
 <div class="search">
   <app-ingredients-input (changeIngredients)="ingredients = $event" />
-  <button mat-stroked-button color="primary" [disabled]="!ingredients.length">Search recipe</button>
+  <button mat-stroked-button color="primary" [disabled]="!ingredients.length" (click)="search()">Search recipe</button>
 </div>
 
-<swiper
-  [config]="config"
-  [effect]="'cards'"
-  (slideChange)="onSlideChange()"
->
-  <ng-template swiperSlide><div class="test">Slide 1</div></ng-template>
-  <ng-template swiperSlide><div class="test">Slide 2</div></ng-template>
-  <ng-template swiperSlide><div class="test">Slide 3</div></ng-template>
-  <ng-template swiperSlide><div class="test">Slide 4</div></ng-template>
-  <ng-template swiperSlide><div class="test">Slide 5</div></ng-template>
-  <ng-template swiperSlide><div class="test">Slide 6</div></ng-template>
-</swiper>
+@if (recipes.length) {
+  @if (recipes[0].name) {
+    <swiper
+      [config]="config"
+      [effect]="'cards'"
+      (slideChange)="onSlideChange()"
+    >
+      @for (recipe of recipes; track recipe.name; let i = $index) {
+        <ng-template swiperSlide><div class="test">{{'Slide '+i}}</div></ng-template>
+      }
+    </swiper>
+  } @else {
+    not found
+  }
+} @else if (loading) {
+  loading
+} @else {
+  search
+}

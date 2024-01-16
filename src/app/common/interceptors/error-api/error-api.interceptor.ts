@@ -10,6 +10,7 @@ import * as authEndpoints from '../../endpoints/auth';
 export const errorApiInterceptor: HttpInterceptorFn = (req, next) => {
 	const authService = inject(AuthService);
 	const authTokensService = inject(AuthTokensService);
+	const router = inject(Router);
 
 	return next(req).pipe(
 		catchError((error: HttpErrorResponse) => {
@@ -26,7 +27,7 @@ export const errorApiInterceptor: HttpInterceptorFn = (req, next) => {
 					catchError(() => {
 						localStorage.removeItem('accessToken');
 						localStorage.removeItem('refreshToken');
-            			inject(Router).navigateByUrl('login');
+            			router.navigateByUrl('login');
 						return EMPTY;
 					}),
 					finalize(() => authTokensService.isRefreshing = false),

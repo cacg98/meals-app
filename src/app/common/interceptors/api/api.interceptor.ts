@@ -28,7 +28,7 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
 	}
 
 	if (!localStorage.getItem('accessToken')) {
-		inject(Router).navigateByUrl('/');
+		inject(Router).navigateByUrl('login');
 		return EMPTY;
 	}
 

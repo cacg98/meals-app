@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { IngredientsInputComponent } from '../../common/components/ingredients-input/ingredients-input.component';
+import { MealsService } from '../../common/services/meals/meals.service';
+import { IPreviewRecipe } from '../../common/interfaces/meals-responses';
 
 import { SwiperModule } from 'swiper/angular';
 
@@ -22,6 +24,7 @@ SwiperCore.use([Navigation, Pagination, EffectCards]);
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  public mealsService = inject(MealsService);
 
   config: SwiperOptions = {
     navigation: true,
@@ -30,8 +33,26 @@ export class HomeComponent {
   };
 
   ingredients: string[] = [];
+  recipes: IPreviewRecipe[] = [];
+
+  loading: boolean = false;
 
   onSlideChange() {
     console.log('slide change');
+  }
+
+  search() {
+    this.loading = true;
+    this.recipes = [];
+    this.mealsService.searchByIngredients(this.ingredients.join(',')).subscribe({
+      next: res => {
+        console.log(res);
+        this.recipes = res;
+      },
+      error: err => {
+        console.log(err);
+      },
+      complete: () => this.loading = false
+    })
   }
 }
