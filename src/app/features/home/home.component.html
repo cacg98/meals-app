@@ -25,15 +25,20 @@
       (slideChange)="onSlideChange()"
     >
       @for (recipe of recipes; track recipe.name; let i = $index) {
-        <ng-template swiperSlide><div class="test">{{'Slide '+i}}</div></ng-template>
+        <ng-template swiperSlide>
+          <div class="card">
+            <p class="name">{{recipe.name}}</p>
+            <button mat-button color="primary" (click)="getRecipe(recipe.anchor)">View recipe</button>
+          </div>
+        </ng-template>
       }
     </swiper>
-  } @else {
-    <img class="placeholder-gif" src="assets\images\not-found-black.gif" alt="">
-    <p style="text-align: center;">Not found</p>
   }
+} @else if (firstSearch) {
+  search
 } @else if (loading) {
   <img class="placeholder-gif" src="assets\images\loading-black.gif" alt="">
 } @else {
-  search
+  <img class="placeholder-gif" src="assets\images\not-found-black.gif" alt="">
+  <p style="text-align: center;">Not found</p>
 }

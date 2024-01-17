@@ -36,23 +36,36 @@ export class HomeComponent {
   recipes: IPreviewRecipe[] = [];
 
   loading: boolean = false;
+  firstSearch: boolean = true;
 
   onSlideChange() {
     console.log('slide change');
   }
 
   search() {
+    if (this.firstSearch) this.firstSearch = false;
     this.loading = true;
     this.recipes = [];
     this.mealsService.searchByIngredients(this.ingredients.join(',')).subscribe({
       next: res => {
         console.log(res);
-        this.recipes = res;
+        this.recipes = res.filter(recipe => recipe.name);
         this.loading = false;
       },
       error: err => {
         console.log(err);
         this.loading = false;
+      }
+    })
+  }
+
+  getRecipe(anchor: string) {
+    this.mealsService.searchRecipe(anchor).subscribe({
+      next: res => {
+        console.log(res);
+      },
+      error: err => {
+        console.log(err);
       }
     })
   }
