@@ -48,11 +48,12 @@ export class HomeComponent {
       next: res => {
         console.log(res);
         this.recipes = res;
+        this.loading = false;
       },
       error: err => {
         console.log(err);
-      },
-      complete: () => this.loading = false
+        this.loading = false;
+      }
     })
   }
 }

@@ -20,7 +20,7 @@ export class AuthTokensService {
 	addAuthorizationHeader(req: HttpRequest<unknown>) {
 		const accessToken = localStorage.getItem('accessToken');
 		const refreshToken = localStorage.getItem('refreshToken');
-		const token = req.url === authEndpoints.REFRESH ? refreshToken : accessToken;
+		const token = req.url === authEndpoints.REFRESH_TOKEN ? refreshToken : accessToken;
 
 		return req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`) });
 	}

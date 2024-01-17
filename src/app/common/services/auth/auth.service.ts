@@ -10,7 +10,7 @@ export class AuthService {
   private _httpClient = inject(HttpClient);
 
   refreshToken() {
-	  return this._httpClient.get<authResponses.ITokens>(authEndpoints.REFRESH);
+	  return this._httpClient.get<authResponses.ITokens>(authEndpoints.REFRESH_TOKEN);
   }
 
   register(email: string, password: string) {

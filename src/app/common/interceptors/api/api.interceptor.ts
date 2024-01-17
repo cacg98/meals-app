@@ -18,7 +18,7 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
 
 	const authTokensService = inject(AuthTokensService);
 
-	if (req.url === authEndpoints.REFRESH) {
+	if (req.url === authEndpoints.REFRESH_TOKEN) {
 		const reqClone = authTokensService.addAuthorizationHeader(req);
 		return next(reqClone);
 	}

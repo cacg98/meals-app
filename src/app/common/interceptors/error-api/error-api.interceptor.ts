@@ -14,7 +14,7 @@ export const errorApiInterceptor: HttpInterceptorFn = (req, next) => {
 
 	return next(req).pipe(
 		catchError((error: HttpErrorResponse) => {
-			if (error.status === HttpStatusCode.Unauthorized && req.url !== authEndpoints.REFRESH) {
+			if (error.status === HttpStatusCode.Unauthorized && req.url !== authEndpoints.REFRESH_TOKEN) {
 				authTokensService.isRefreshing = true;
 
 				return authService.refreshToken().pipe(
