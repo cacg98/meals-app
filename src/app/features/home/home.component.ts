@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
@@ -19,7 +20,7 @@ SwiperCore.use([Navigation, Pagination, EffectCards]);
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, SwiperModule, IngredientsInputComponent],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, SwiperModule, IngredientsInputComponent, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -55,17 +56,6 @@ export class HomeComponent {
       error: err => {
         console.log(err);
         this.loading = false;
-      }
-    })
-  }
-
-  getRecipe(anchor: string) {
-    this.mealsService.searchRecipe(anchor).subscribe({
-      next: res => {
-        console.log(res);
-      },
-      error: err => {
-        console.log(err);
       }
     })
   }
