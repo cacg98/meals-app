@@ -1,10 +1,10 @@
 <div class="search">
-  <app-ingredients-input [ingredients]="ingredientsSignal()" (ingredientsChange)="ingredientsSignal.set($event)" />
-  <button mat-stroked-button color="primary" [disabled]="!ingredientsSignal().length" (click)="search()">Search recipe</button>
+  <app-ingredients-input [ingredients]="ingredients()" (ingredientsChange)="ingredients.set($event)" />
+  <button mat-stroked-button color="primary" [disabled]="!ingredients().length" (click)="search()">Search recipe</button>
 </div>
 
-@if (recipesSignal().length) {
-  @if (recipesSignal()[0].name) {
+@if (recipes().length) {
+  @if (recipes()[0].name) {
     <swiper
       #swiper
       [config]="config"
@@ -12,7 +12,7 @@
       (afterInit)="afterInitSwiper()"
       (slideChange)="onSlideChange($event)"
     >
-      @for (recipe of recipesSignal(); track recipe.name; let i = $index) {
+      @for (recipe of recipes(); track recipe.name; let i = $index) {
         <ng-template swiperSlide>
           <div class="card">
             <p class="name">{{recipe.name}}</p>
