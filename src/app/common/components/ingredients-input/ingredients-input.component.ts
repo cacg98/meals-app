@@ -1,5 +1,5 @@
 import {COMMA, ENTER, SPACE} from '@angular/cdk/keycodes';
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import {MatChipEditedEvent, MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -14,10 +14,10 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
 })
 export class IngredientsInputComponent {
 
-  @Output() changeIngredients = new EventEmitter<string[]>();
+  @Input() ingredients: string[] = [];
+  @Output() ingredientsChange = new EventEmitter<string[]>();
 
   readonly separatorKeysCodes = [ENTER, COMMA, SPACE] as const;
-  ingredients: string[] = [];
 
   announcer = inject(LiveAnnouncer);
 
@@ -26,7 +26,7 @@ export class IngredientsInputComponent {
 
     if (value) {
       this.ingredients.push(value);
-      this.changeIngredients.emit(this.ingredients);
+      this.ingredientsChange.emit(this.ingredients);
     }
 
     event.chipInput!.clear();
@@ -34,7 +34,7 @@ export class IngredientsInputComponent {
 
   remove(ingredient: string, index: number): void {
     this.ingredients.splice(index, 1);
-    this.changeIngredients.emit(this.ingredients);
+    this.ingredientsChange.emit(this.ingredients);
     this.announcer.announce(`Removed ${ingredient}`);
   }
 
@@ -47,6 +47,6 @@ export class IngredientsInputComponent {
     }
 
     this.ingredients[index] = value;
-    this.changeIngredients.emit(this.ingredients);
+    this.ingredientsChange.emit(this.ingredients);
   }
 }
