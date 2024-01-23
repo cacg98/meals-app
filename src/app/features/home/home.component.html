@@ -16,18 +16,34 @@
         <ng-template swiperSlide>
           <div class="card">
             <p class="name">{{recipe.name}}</p>
-            <button mat-button color="primary" [routerLink]="['/recipes', recipe.anchor]"
-            routerLinkActive="router-link-active">View recipe</button>
+            <img [src]="recipeImg(recipe.image)" alt="">
+            <div class="info">
+              <div class="item">
+                <span class="title">Level</span>
+                <span>{{recipe.info[0]}}</span>
+              </div>
+              <div class="item">
+                <span class="title">Time</span>
+                <span>{{recipe.info[1]}}</span>
+              </div>
+            </div>
+            <button mat-button color="primary" routerLinkActive="router-link-active" [routerLink]="['/recipes', recipe.anchor]">View recipe</button>
           </div>
         </ng-template>
       }
     </swiper>
   }
-} @else if (firstSearch) {
-  search
-} @else if (loading) {
-  <img class="placeholder-gif" src="assets\images\loading-black.gif" alt="">
 } @else {
-  <img class="placeholder-gif" src="assets\images\not-found-black.gif" alt="">
-  <p style="text-align: center;">Not found</p>
+  <div class="container-placeholder">
+    @if (firstSearch) {
+      search
+    } @else if (loading) {
+      <img class="placeholder-gif" src="assets\images\loading-black.gif" alt="">
+    } @else {
+      <div>
+        <img class="placeholder-gif" src="assets\images\not-found-black.gif" alt="">
+        <p style="text-align: center; margin-bottom: 0;">Not found</p>
+      </div>
+    }
+  </div>
 }

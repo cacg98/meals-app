@@ -1,8 +1,12 @@
 @import '../../../assets/scss/colors.scss';
 
 .swiper {
-    height: 13rem;
-    width: 13rem;
+    height: 24rem;
+    width: 16rem;
+    @media (max-width: 576px) {
+        height: 21rem;
+        width: 13rem;
+    }
 }
 
 .card {
@@ -10,13 +14,42 @@
     width: 100%;
     border-radius: 1rem;
     background-color: $primary-50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     .name {
         margin: 0;
         padding: 1rem;
+        color: $primary-900;
+    }
+    img {
+        height: 12rem;
+        width: 100%;
+        object-fit: contain;
+        @media (max-width: 576px) {
+            height: 8rem;
+        }
+    }
+    .info {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 0.8rem;
+        margin: 1rem 0;
+        .item {
+            text-align: center;
+            span {
+                display: block;
+            }
+            .title {
+                color: $primary-900;
+            }
+        }
     }
     button {
-        display: block;
-        margin: auto;
+        margin-bottom: 2rem;
     }
 }
 
@@ -25,14 +58,21 @@
     flex-direction: column;
     align-items: flex-end;
     margin: 2rem;
-
     app-ingredients-input {
         width: 100%;
     }
 }
 
-.placeholder-gif {
-    width: 5rem;
-    display: block;
-    margin: auto;
+.container-placeholder {
+    height: 24rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media (max-width: 576px) {
+        height: 21rem;
+    }
+    .placeholder-gif {
+        width: 5rem;
+    }
 }

@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
 
+import { environment } from '../../../environments/environment.development';
 import { IngredientsInputComponent } from '../../common/components/ingredients-input/ingredients-input.component';
 import { MealsService } from '../../common/services/meals/meals.service';
 import { StateService } from '../../common/services/state/state.service';
@@ -18,7 +19,7 @@ SwiperCore.use([Navigation, Pagination, EffectCards]);
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MatButtonModule, SwiperModule, IngredientsInputComponent, RouterModule],
+  imports: [RouterModule, MatButtonModule, SwiperModule, IngredientsInputComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -58,7 +59,6 @@ export class HomeComponent {
     this.recipes.set([]);
     this.mealsService.searchByIngredients(this.ingredients().join(',')).subscribe({
       next: res => {
-        console.log(res);
         this.recipes.set(res.filter(recipe => recipe.name));
         this.loading = false;
         this.activeIndex.set(0);
@@ -68,5 +68,9 @@ export class HomeComponent {
         this.loading = false;
       }
     })
+  }
+
+  recipeImg(anchor: string): string {
+    return environment.nestleUrl + anchor;
   }
 }
