@@ -1,11 +1,15 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
+import {MatIconModule} from '@angular/material/icon';
+
+import { environment } from '../../../environments/environment.development';
 import { IRecipe } from '../../common/interfaces/meals-responses';
 
 @Component({
   selector: 'app-recipe-detail',
   standalone: true,
-  imports: [],
+  imports: [MatIconModule],
   templateUrl: './recipe-detail.component.html',
   styleUrl: './recipe-detail.component.scss'
 })
@@ -18,9 +22,12 @@ export class RecipeDetailComponent implements OnInit {
     this.route.data.subscribe(
       ({recipe}) => {
         this.recipe = recipe;
-        console.log(this.recipe);        
       }
     )
+  }
+
+  recipeImg(path: string): string {
+    return environment.nestleUrl + path;
   }
 
 }

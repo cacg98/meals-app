@@ -70,7 +70,7 @@ export class HomeComponent {
     })
   }
 
-  recipeImg(anchor: string): string {
-    return environment.nestleUrl + anchor;
+  recipeImg(path: string): string {
+    return environment.nestleUrl + path;
   }
 }

@@ -1,14 +1,11 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button aria-label="Menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
   <span>Meals App</span>
   <span class="spacer"></span>
   <button mat-icon-button aria-label="Heart icon">
     <mat-icon>favorite</mat-icon>
   </button>
-  <button mat-icon-button aria-label="Share icon">
-    <mat-icon>share</mat-icon>
+  <button mat-icon-button aria-label="Logout icon" (click)="logout()">
+    <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>
 
