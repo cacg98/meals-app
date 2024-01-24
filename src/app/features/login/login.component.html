@@ -21,7 +21,7 @@
             <button type="submit" mat-flat-button color="primary" [disabled]="profileForm.invalid">Submit</button>
         </form>
         <div class="container-sign">
-            <mat-button-toggle-group [(ngModel)]="isSignUp" name="sign" aria-label="Sign">
+            <mat-button-toggle-group [(ngModel)]="isSignUp" name="sign" aria-label="Sign" (change)="changeForm()">
                 <mat-button-toggle [value]="true">Sign Up</mat-button-toggle>
                 <mat-button-toggle [value]="false">Sign In</mat-button-toggle>
             </mat-button-toggle-group>

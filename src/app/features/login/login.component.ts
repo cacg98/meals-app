@@ -10,6 +10,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { AuthService } from '../../common/services/auth/auth.service';
 import { AuthTokensService } from '../../common/services/auth-tokens/auth-tokens.service';
+import { StateService } from '../../common/services/state/state.service';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent {
   private authSerive = inject(AuthService)
   private authTokensSerive = inject(AuthTokensService)
   private router = inject(Router)
+  private stateService = inject(StateService)
 
   profileForm = this.formBuilder.nonNullable.group({
     email: ['cacg98@gmail.com', [Validators.required, Validators.email]],
@@ -50,7 +52,12 @@ export class LoginComponent {
     observable.subscribe({
       next: res => {
         this.authTokensSerive.updateTokens(res.accessToken, res.refreshToken)
-        this.router.navigateByUrl('home')
+        if (this.isSignUp) {
+          this.isSignUp = false
+        } else {
+          this.stateService.resetState()
+          this.router.navigateByUrl('home')
+        }
       },
       error: err => {
         console.log(err)
@@ -64,5 +71,13 @@ export class LoginComponent {
     }
 
     return this.email!.hasError('email') ? 'Not a valid email' : '';
+  }
+
+  changeForm() {
+    if (this.isSignUp) {
+      this.profileForm.setValue({email: '', password: ''})
+    } else {
+      this.profileForm.reset()
+    }
   }
 }

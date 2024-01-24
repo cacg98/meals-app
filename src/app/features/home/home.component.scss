@@ -19,8 +19,7 @@
     align-items: center;
     justify-content: space-between;
     .name {
-        margin: 0;
-        padding: 1rem;
+        margin: 1rem 0 0;
         color: $primary-900;
     }
     img {
@@ -37,7 +36,6 @@
         align-items: center;
         justify-content: space-around;
         font-size: 0.8rem;
-        margin: 1rem 0;
         .item {
             text-align: center;
             span {

@@ -22,7 +22,7 @@ export const routes: Routes = [
                 loadComponent: () => import('./features/home/home.component').then(comp => comp.HomeComponent)
             },
             {
-                path: 'recipes/:name', 
+                path: 'recipes/:path', 
                 canActivate: [authGuard], 
                 resolve: {recipe: recipeResolver}, 
                 loadComponent: () => import('./features/recipe-detail/recipe-detail.component').then(comp => comp.RecipeDetailComponent)
