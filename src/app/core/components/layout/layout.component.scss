@@ -1,3 +1,11 @@
+@import '../../../../assets/scss/colors.scss';
+
 .spacer {
     flex: 1 1 auto;
+}
+
+footer {
+    height: 10vh;
+    background-color: $primary-400;
+    color: $primary-50;
 }
