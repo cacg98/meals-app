@@ -1,4 +1,5 @@
 import { Component, ViewChild, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -19,15 +20,15 @@ SwiperCore.use([Navigation, Pagination, EffectCards]);
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, MatButtonModule, SwiperModule, IngredientsInputComponent],
+  imports: [CommonModule, RouterModule, MatButtonModule, SwiperModule, IngredientsInputComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   @ViewChild('swiper', { static: false }) swiper?: SwiperComponent;
 
-  public mealsService = inject(MealsService);
-  public stateService = inject(StateService);
+  private mealsService = inject(MealsService);
+  private stateService = inject(StateService);
 
   get ingredients() { return this.stateService.ingredients; }
   get recipes() { return this.stateService.recipes; }
@@ -41,6 +42,7 @@ export class HomeComponent {
 
   loading: boolean = false;
   firstSearch: boolean = true;
+  showingPlaceholderImg: boolean = true;
 
   afterInitSwiper() {
     if (this.activeIndex() == 0) return;
@@ -56,6 +58,7 @@ export class HomeComponent {
   search() {
     if (this.firstSearch) this.firstSearch = false;
     this.loading = true;
+    this.showingPlaceholderImg = true;
     this.recipes.set([]);
     this.mealsService.searchByIngredients(this.ingredients().join(',')).subscribe({
       next: res => {

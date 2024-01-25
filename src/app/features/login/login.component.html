@@ -18,7 +18,7 @@
                   <mat-error>{{ 'You must enter a value' }}</mat-error>
                 }
             </mat-form-field>
-            <button type="submit" mat-flat-button color="primary" [disabled]="profileForm.invalid">Submit</button>
+            <button type="submit" mat-flat-button color="primary" [disabled]="profileForm.invalid || loading">Submit</button>
         </form>
         <div class="container-sign">
             <mat-button-toggle-group [(ngModel)]="isSignUp" name="sign" aria-label="Sign" (change)="changeForm()">

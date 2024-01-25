@@ -1,8 +1,20 @@
 <div class="container-recipe">
     <div class="recipe-img">
-        <img class="background" [src]="recipeImg(recipe.image)" alt="">
+        @if (!showingPlaceholderImg) {
+            <img class="background" [src]="recipeImg(recipe.image)" alt="">
+        }
         <div class="container-img">
-            <img [src]="recipeImg(recipe.image)" alt="">
+            <img
+              [ngStyle]="{'display': showingPlaceholderImg ? '' : 'none'}"
+              src="assets/images/placeholder-image.webp"
+              alt=""
+            >
+            <img
+              [ngStyle]="{'display': showingPlaceholderImg ? 'none' : ''}"
+              [src]="recipeImg(recipe.image)"
+              (load)="showingPlaceholderImg = false"
+              alt=""
+            >
         </div>
     </div>
     <p class="name">{{recipe.name}}</p>

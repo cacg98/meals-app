@@ -1,1 +1,7 @@
 <router-outlet></router-outlet>
+
+@if (loading) {
+    <div class="container-spinner">
+        <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+}

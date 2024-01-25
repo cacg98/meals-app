@@ -7,10 +7,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { AuthService } from '../../common/services/auth/auth.service';
 import { AuthTokensService } from '../../common/services/auth-tokens/auth-tokens.service';
 import { StateService } from '../../common/services/state/state.service';
+import { LoaderService } from '../../common/services/loader/loader.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +27,8 @@ export class LoginComponent {
   private authTokensSerive = inject(AuthTokensService)
   private router = inject(Router)
   private stateService = inject(StateService)
+  private snackBarService = inject(MatSnackBar)
+  private loaderService = inject(LoaderService)
 
   profileForm = this.formBuilder.nonNullable.group({
     email: ['cacg98@gmail.com', [Validators.required, Validators.email]],
@@ -39,10 +43,21 @@ export class LoginComponent {
     return this.profileForm.get('password')
   }
 
+  get loading(): boolean {
+    return this.loaderService.loading;
+  }
+
   isSignUp: boolean = false
   hide: boolean = true
 
+  apiErrors: Record<string, string> = {
+    'Email already used': 'Ya existe un usuario con este correo electrónico',
+    'Wrong email or password': 'Correo electrónico o contraseña equivocada'
+  }
+
   onSubmit() {
+    this.loaderService.showSpinner()
+
     const { email, password } = this.profileForm.value
 
     const observable = this.isSignUp ? 
@@ -53,14 +68,23 @@ export class LoginComponent {
       next: res => {
         this.authTokensSerive.updateTokens(res.accessToken, res.refreshToken)
         if (this.isSignUp) {
+          this.snackBarService.open('Registro exitoso. Inicie sesión ahora', undefined, {
+            duration: 5000,
+            verticalPosition: 'top'
+          })
           this.isSignUp = false
         } else {
           this.stateService.resetState()
           this.router.navigateByUrl('home')
         }
+        this.loaderService.hideSpinner()
       },
       error: err => {
-        console.log(err)
+        this.snackBarService.open(this.apiErrors[err.error.message], undefined, {
+          duration: 5000,
+          verticalPosition: 'top'
+        })
+        this.loaderService.hideSpinner()
       }
     })
   }
