@@ -1,36 +1,51 @@
 @import '../../../assets/scss/colors.scss';
 
-.container-recipe {
+.recipe-img {
+    height: 40vh;
+    width: 100%;
+    position: relative;
+    @media (max-width: 576px) {
+        height: 20vh;
+    }
+    .background {
+        height: inherit;
+        width: inherit;
+        object-fit: cover;
+    }
+    .container-img {
+        height: inherit;
+        width: inherit;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        backdrop-filter: blur(10px);
+        img {
+            height: inherit;
+            object-fit: contain;
+            display: block;
+            margin: auto;
+        }
+    }
+}
+.recipe-details {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
     margin-bottom: 2rem;
-    .recipe-img {
-        height: 40vh;
-        width: 100%;
-        position: relative;
-        @media (max-width: 576px) {
-            height: 20vh;
+    .bg-image{
+        position: absolute;
+        z-index: -1;
+        height: 100px;
+        opacity: .5;
+        &.left-img {
+            left: 2rem;
+            transform: rotate(-15deg);
         }
-        .background {
-            height: inherit;
-            width: inherit;
-            object-fit: cover;
-        }
-        .container-img {
-            height: inherit;
-            width: inherit;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            backdrop-filter: blur(10px);
-            img {
-                height: inherit;
-                object-fit: contain;
-                display: block;
-                margin: auto;
-            }
+        &.right-img {
+            right: 2rem;
+            transform: rotate(15deg);
         }
     }
     .name {

@@ -1,22 +1,31 @@
-<div class="container-recipe">
-    <div class="recipe-img">
-        @if (!showingPlaceholderImg) {
-            <img class="background" [src]="recipeImg(recipe.image)" alt="">
-        }
-        <div class="container-img">
-            <img
-              [ngStyle]="{'display': showingPlaceholderImg ? '' : 'none'}"
-              src="assets/images/placeholder-image.webp"
-              alt=""
-            >
-            <img
-              [ngStyle]="{'display': showingPlaceholderImg ? 'none' : ''}"
-              [src]="recipeImg(recipe.image)"
-              (load)="showingPlaceholderImg = false"
-              alt=""
-            >
-        </div>
+<div class="recipe-img">
+    @if (!showingPlaceholderImg) {
+        <img class="background" [src]="recipeImg(recipe.image)" alt="">
+    }
+    <div class="container-img">
+        <img
+            alt=""
+            src="assets/images/placeholder-image.webp"
+            [ngStyle]="{'display': showingPlaceholderImg ? '' : 'none'}"
+        >
+        <img
+            alt=""
+            [src]="recipeImg(recipe.image)"
+            [ngStyle]="{'display': showingPlaceholderImg ? 'none' : ''}"
+            (load)="showingPlaceholderImg = false"
+        >
     </div>
+</div>
+<div #details class="recipe-details">
+    @for (bgImage of bgImages; track $index; let even = $even) {
+        <img 
+            class="bg-image"
+            alt=""
+            [src]="bgImage.url"
+            [ngClass]="{'left-img': even, 'right-img': !even}"
+            [ngStyle]="{'top': bgImage.top}"
+        >
+    }
     <p class="name">{{recipe.name}}</p>
     <div class="info">
         @if (recipe.difficulty) {

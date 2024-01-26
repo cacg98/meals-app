@@ -48,7 +48,7 @@ export class HomeComponent {
     if (this.activeIndex() == 0) return;
     setTimeout(() => {
       this.swiper?.swiperRef.slideTo(this.activeIndex(), 0, false);
-    }, 0);
+    });
   }
 
   onSlideChange(e: any) {
