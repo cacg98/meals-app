@@ -37,7 +37,9 @@
                 <span>{{recipe.info[1]}}</span>
               </div>
             </div>
-            <button mat-button color="primary" routerLinkActive="router-link-active" [routerLink]="['/recipes', recipe.anchor]">View recipe</button>
+            <button mat-button color="primary">
+              <a routerLinkActive="router-link-active" [routerLink]="['/recipes', recipe.anchor]">View recipe</a>
+            </button>
           </div>
         </ng-template>
       }
