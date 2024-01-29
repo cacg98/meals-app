@@ -27,17 +27,41 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
   bgImages: { url: string, top: string }[] = [];
   bgImagesUrls: string[] = [
     'assets/images/aguacate.webp',
+    'assets/images/aji.webp',
     'assets/images/ajo.webp',
+    'assets/images/arandano.webp',
+    'assets/images/azucar.webp',
     'assets/images/berenjena.webp',
+    'assets/images/brocoli.webp',
+    'assets/images/calamar.webp',
+    'assets/images/camaron.webp',
+    'assets/images/cambur.webp',
+    'assets/images/cangrejo.webp',
     'assets/images/carne.webp',
     'assets/images/cebolla.webp',
+    'assets/images/cereza.webp',
     'assets/images/fresa.webp',
+    'assets/images/guisante.webp',
     'assets/images/harina.webp',
     'assets/images/huevo.webp',
+    'assets/images/kiwi.webp',
+    'assets/images/lechuga.webp',
+    'assets/images/limon.webp',
+    'assets/images/mango.webp',
+    'assets/images/manzana.webp',
+    'assets/images/naranja.webp',
+    'assets/images/patilla.webp',
+    'assets/images/pepino.webp',
+    'assets/images/pera.webp',
+    'assets/images/pescado.webp',
     'assets/images/pimenton.webp',
     'assets/images/pollo.webp',
     'assets/images/queso.webp',
+    'assets/images/rabano.webp',
+    'assets/images/repollo.webp',
+    'assets/images/sal.webp',
     'assets/images/tomate.webp',
+    'assets/images/zanahoria.webp',
   ];
 
   ngOnInit(): void {
@@ -51,7 +75,7 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     const detailsHeight = this.details.nativeElement.offsetHeight;
-    const numberOfImages = Math.floor(detailsHeight / 100);
+    const numberOfImages = Math.floor(detailsHeight / 124);
     let top: number = 0;
     for (let index = 0; index < numberOfImages; index++) {
       const randIndex = this.randomNumber(this.bgImagesUrls.length);
@@ -59,7 +83,7 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
         url: this.bgImagesUrls[randIndex],
         top: `${top}px`
       });
-      top += 100;
+      top += 124;
       this.bgImagesUrls.splice(randIndex, 1);
     }
   }
