@@ -26,18 +26,18 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
   showingPlaceholderImg: boolean = true;
   bgImages: { url: string, top: string }[] = [];
   bgImagesUrls: string[] = [
-    'assets/images/ingrediente-aguacate.webp',
-    'assets/images/ingrediente-ajo.webp',
-    'assets/images/ingrediente-berenjena.webp',
-    'assets/images/ingrediente-carne.webp',
-    'assets/images/ingrediente-cebolla.webp',
-    'assets/images/ingrediente-fresa.webp',
-    'assets/images/ingrediente-harina.webp',
-    'assets/images/ingrediente-huevo.webp',
-    'assets/images/ingrediente-pimenton.webp',
-    'assets/images/ingrediente-pollo.webp',
-    'assets/images/ingrediente-queso.webp',
-    'assets/images/ingrediente-tomate.webp',
+    'assets/images/aguacate.webp',
+    'assets/images/ajo.webp',
+    'assets/images/berenjena.webp',
+    'assets/images/carne.webp',
+    'assets/images/cebolla.webp',
+    'assets/images/fresa.webp',
+    'assets/images/harina.webp',
+    'assets/images/huevo.webp',
+    'assets/images/pimenton.webp',
+    'assets/images/pollo.webp',
+    'assets/images/queso.webp',
+    'assets/images/tomate.webp',
   ];
 
   ngOnInit(): void {
