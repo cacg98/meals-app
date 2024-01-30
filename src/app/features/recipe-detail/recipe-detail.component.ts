@@ -1,12 +1,14 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { Subscription, filter } from 'rxjs';
 
 import {MatIconModule} from '@angular/material/icon';
 
 import { environment } from '../../../environments/environment.development';
 import { IRecipe } from '../../common/interfaces/meals-responses';
 import { LoaderService } from '../../common/services/loader/loader.service';
+import { RecordsService } from '../../common/services/records/records.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -16,11 +18,13 @@ import { LoaderService } from '../../common/services/loader/loader.service';
   styleUrl: './recipe-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RecipeDetailComponent implements OnInit, AfterViewInit {
+export class RecipeDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('details') details!: ElementRef;
 
   private route = inject(ActivatedRoute);
   private loaderService = inject(LoaderService);
+  private router = inject(Router);
+  private recordsService = inject(RecordsService);
 
   recipe!: IRecipe;
   showingPlaceholderImg: boolean = true;
@@ -64,12 +68,30 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
     'assets/images/zanahoria.webp',
   ];
 
+  subscription: Subscription = new Subscription();
+
   ngOnInit(): void {
     this.route.data.subscribe(
       ({recipe}) => {
         this.recipe = recipe;
         Promise.resolve(null).then(() => this.loaderService.hideSpinner());
       }
+    )
+
+    this.subscription.add(
+      this.router.events.pipe(filter(e => e instanceof NavigationStart)).subscribe(e => {
+        const navigation = this.router.getCurrentNavigation();
+        if (navigation?.id == 2) {
+          this.recordsService.list().subscribe({
+            next: res => {
+              console.log(res);
+            },
+            error: err => {
+              console.log(err);
+            }
+          })
+        }
+      })
     )
   }
 
@@ -86,6 +108,10 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
       top += 124;
       this.bgImagesUrls.splice(randIndex, 1);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   recipeImg(path: string): string {

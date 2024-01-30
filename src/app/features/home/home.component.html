@@ -4,47 +4,45 @@
 </div>
 
 @if (recipes().length) {
-  @if (recipes()[0].name) {
-    <swiper
-      #swiper
-      [config]="config"
-      [effect]="'cards'"
-      (afterInit)="afterInitSwiper()"
-      (slideChange)="onSlideChange($event)"
-    >
-      @for (recipe of recipes(); track recipe.name; let i = $index) {
-        <ng-template swiperSlide>
-          <div class="card">
-            <p class="name">{{recipe.name}}</p>
-            <img
-              [ngStyle]="{'display': showingPlaceholderImg ? '' : 'none'}"
-              src="assets/images/placeholder-image.webp"
-              alt=""
-            >
-            <img
-              [ngStyle]="{'display': showingPlaceholderImg ? 'none' : ''}"
-              [src]="recipeImg(recipe.image)"
-              (load)="showingPlaceholderImg = false"
-              alt=""
-            >
-            <div class="info">
-              <div class="item">
-                <span class="title">Level</span>
-                <span>{{recipe.info[0]}}</span>
-              </div>
-              <div class="item">
-                <span class="title">Time</span>
-                <span>{{recipe.info[1]}}</span>
-              </div>
+  <swiper
+    #swiper
+    [config]="config"
+    [effect]="'cards'"
+    (afterInit)="afterInitSwiper()"
+    (slideChange)="onSlideChange($event)"
+  >
+    @for (recipe of recipes(); track recipe.name; let i = $index) {
+      <ng-template swiperSlide>
+        <div class="card">
+          <p class="name">{{recipe.name}}</p>
+          <img
+            [ngStyle]="{'display': showingPlaceholderImg ? '' : 'none'}"
+            src="assets/images/placeholder-image.webp"
+            alt=""
+          >
+          <img
+            [ngStyle]="{'display': showingPlaceholderImg ? 'none' : ''}"
+            [src]="recipeImg(recipe.image)"
+            (load)="showingPlaceholderImg = false"
+            alt=""
+          >
+          <div class="info">
+            <div class="item">
+              <span class="title">Level</span>
+              <span>{{recipe.info[0]}}</span>
             </div>
-            <button mat-button color="primary">
-              <a routerLinkActive="router-link-active" [routerLink]="['/recipes', recipe.anchor]">View recipe</a>
-            </button>
+            <div class="item">
+              <span class="title">Time</span>
+              <span>{{recipe.info[1]}}</span>
+            </div>
           </div>
-        </ng-template>
-      }
-    </swiper>
-  }
+          <button mat-button color="primary">
+            <a routerLinkActive="router-link-active" [routerLink]="['/recipes', recipe.anchor]">View recipe</a>
+          </button>
+        </div>
+      </ng-template>
+    }
+  </swiper>
 } @else {
   <div class="container-placeholder">
     @if (firstSearch) {

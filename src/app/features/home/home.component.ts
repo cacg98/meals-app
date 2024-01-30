@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment.development';
 import { IngredientsInputComponent } from '../../common/components/ingredients-input/ingredients-input.component';
 import { MealsService } from '../../common/services/meals/meals.service';
 import { StateService } from '../../common/services/state/state.service';
+import { RecordsService } from '../../common/services/records/records.service';
 
 import { SwiperComponent, SwiperModule } from 'swiper/angular';
 
@@ -29,6 +30,7 @@ export class HomeComponent {
 
   private mealsService = inject(MealsService);
   private stateService = inject(StateService);
+  private recordsService = inject(RecordsService);
 
   get ingredients() { return this.stateService.ingredients; }
   get recipes() { return this.stateService.recipes; }
@@ -62,9 +64,19 @@ export class HomeComponent {
     this.recipes.set([]);
     this.mealsService.searchByIngredients(this.ingredients().join(',')).subscribe({
       next: res => {
-        this.recipes.set(res.filter(recipe => recipe.name));
+        this.recipes.set(res);
         this.loading = false;
         this.activeIndex.set(0);
+        if (res.length) {
+          this.recordsService.createOrUpdate(this.ingredients(), res[0].image).subscribe({
+            next: res => {
+              console.log(res);
+            },
+            error: err => {
+              console.log(err);
+            }
+          })
+        }
       },
       error: err => {
         console.log(err);

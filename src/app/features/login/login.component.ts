@@ -13,6 +13,7 @@ import { AuthService } from '../../common/services/auth/auth.service';
 import { AuthTokensService } from '../../common/services/auth-tokens/auth-tokens.service';
 import { StateService } from '../../common/services/state/state.service';
 import { LoaderService } from '../../common/services/loader/loader.service';
+import { RecordsService } from '../../common/services/records/records.service';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +30,9 @@ export class LoginComponent {
   private stateService = inject(StateService)
   private snackBarService = inject(MatSnackBar)
   private loaderService = inject(LoaderService)
+  private recordsService = inject(RecordsService)
+
+  // TODO: custom email validator
 
   profileForm = this.formBuilder.nonNullable.group({
     email: ['cacg98@gmail.com', [Validators.required, Validators.email]],
@@ -44,7 +48,7 @@ export class LoginComponent {
   }
 
   get loading(): boolean {
-    return this.loaderService.loading;
+    return this.loaderService.loading
   }
 
   isSignUp: boolean = false
@@ -54,6 +58,8 @@ export class LoginComponent {
     'Email already used': 'Ya existe un usuario con este correo electrónico',
     'Wrong email or password': 'Correo electrónico o contraseña equivocada'
   }
+
+  // TODO: refactor onSubmit
 
   onSubmit() {
     this.loaderService.showSpinner()
@@ -65,8 +71,7 @@ export class LoginComponent {
       this.authSerive.login(email!, password!)
 
     observable.subscribe({
-      next: res => {
-        this.authTokensSerive.updateTokens(res.accessToken, res.refreshToken)
+      next: (res: any) => {
         if (this.isSignUp) {
           this.snackBarService.open('Registro exitoso. Inicie sesión ahora', undefined, {
             duration: 5000,
@@ -74,8 +79,17 @@ export class LoginComponent {
           })
           this.isSignUp = false
         } else {
+          this.authTokensSerive.updateTokens(res.accessToken, res.refreshToken)
           this.stateService.resetState()
           this.router.navigateByUrl('home')
+          this.recordsService.list().subscribe({
+            next: res => {
+              console.log(res)
+            },
+            error: err => {
+              console.log(err)
+            }
+          })
         }
         this.loaderService.hideSpinner()
       },
@@ -91,10 +105,10 @@ export class LoginComponent {
 
   getErrorMessage() {
     if (this.email!.hasError('required')) {
-      return 'You must enter a value';
+      return 'You must enter a value'
     }
 
-    return this.email!.hasError('email') ? 'Not a valid email' : '';
+    return this.email!.hasError('email') ? 'Not a valid email' : ''
   }
 
   changeForm() {
