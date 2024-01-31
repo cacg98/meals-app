@@ -13,7 +13,7 @@
   >
     @for (recipe of recipes(); track recipe.name; let i = $index) {
       <ng-template swiperSlide>
-        <div class="card">
+        <div class="recipe-card">
           <p class="name">{{recipe.name}}</p>
           <img
             [ngStyle]="{'display': showingPlaceholderImg ? '' : 'none'}"
@@ -36,7 +36,14 @@
               <span>{{recipe.info[1]}}</span>
             </div>
           </div>
-          <button mat-button color="primary" routerLinkActive="router-link-active" [routerLink]="['/recipes', recipe.anchor]">View recipe</button>
+          <button
+            mat-button
+            color="primary"
+            routerLinkActive="router-link-active"
+            [routerLink]="['/recipes', recipe.anchor]"
+          >
+            View recipe
+          </button>
         </div>
       </ng-template>
     }
@@ -55,4 +62,17 @@
     }
   </div>
 }
-<pre>{{records() | json}}</pre>
+
+<div class="container-records">
+  @for (record of records(); track record._id) {
+    <div class="record-card">
+      <img [src]="recipeImg(record.image)" alt="">
+      <mat-chip-set role="list">
+        @for (ingredient of record.ingredients; track ingredient) {
+          <mat-chip role="listitem">{{ingredient}}</mat-chip>
+        }
+      </mat-chip-set>
+      <span>{{ record.date | date }}</span>
+    </div>
+  }
+</div>

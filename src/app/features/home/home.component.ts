@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
+import {MatChipsModule} from '@angular/material/chips';
 
 import { environment } from '../../../environments/environment.development';
 import { IngredientsInputComponent } from '../../common/components/ingredients-input/ingredients-input.component';
@@ -21,7 +22,7 @@ SwiperCore.use([Navigation, Pagination, EffectCards]);
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule, SwiperModule, IngredientsInputComponent],
+  imports: [CommonModule, RouterModule, MatButtonModule, MatChipsModule, SwiperModule, IngredientsInputComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

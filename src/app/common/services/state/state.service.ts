@@ -1,6 +1,7 @@
 import { Injectable, WritableSignal, signal } from '@angular/core';
 
 import { IPreviewRecipe } from '../../interfaces/meals-responses';
+import { IRecord } from '../../interfaces/records-responses';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class StateService {
 
   activeIndex: WritableSignal<number> = signal(0);
 
-  records: WritableSignal<any[]> = signal([]);
+  records: WritableSignal<IRecord[]> = signal([]);
 
   resetState() {
     this.ingredients.set([]);
