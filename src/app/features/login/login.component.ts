@@ -84,7 +84,7 @@ export class LoginComponent {
           this.router.navigateByUrl('home')
           this.recordsService.list().subscribe({
             next: res => {
-              console.log(res)
+              this.stateService.records.set(res)
             },
             error: err => {
               console.log(err)

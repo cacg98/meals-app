@@ -36,9 +36,7 @@
               <span>{{recipe.info[1]}}</span>
             </div>
           </div>
-          <button mat-button color="primary">
-            <a routerLinkActive="router-link-active" [routerLink]="['/recipes', recipe.anchor]">View recipe</a>
-          </button>
+          <button mat-button color="primary" routerLinkActive="router-link-active" [routerLink]="['/recipes', recipe.anchor]">View recipe</button>
         </div>
       </ng-template>
     }
@@ -57,3 +55,4 @@
     }
   </div>
 }
+<pre>{{records() | json}}</pre>

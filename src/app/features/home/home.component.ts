@@ -35,6 +35,7 @@ export class HomeComponent {
   get ingredients() { return this.stateService.ingredients; }
   get recipes() { return this.stateService.recipes; }
   get activeIndex() { return this.stateService.activeIndex; }
+  get records() { return this.stateService.records; }
 
   config: SwiperOptions = {
     navigation: true,
@@ -70,7 +71,7 @@ export class HomeComponent {
         if (res.length) {
           this.recordsService.createOrUpdate(this.ingredients(), res[0].image).subscribe({
             next: res => {
-              console.log(res);
+              this.records.set(res);
             },
             error: err => {
               console.log(err);
