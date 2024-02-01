@@ -16,7 +16,7 @@ import { LoaderService } from '../../common/services/loader/loader.service';
   styleUrl: './recipe-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RecipeDetailComponent implements OnInit, AfterViewInit {
+export default class RecipeDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('details') details!: ElementRef;
 
   private route = inject(ActivatedRoute);

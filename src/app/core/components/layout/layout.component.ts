@@ -12,7 +12,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
-export class LayoutComponent {
+export default class LayoutComponent {
   private router = inject(Router);
 
   logout() {

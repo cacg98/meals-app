@@ -90,13 +90,40 @@
         padding: 1rem;
         border-radius: 1rem;
         background-color: $primary-50;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+        -webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+        transition: transform ease-in-out 200ms;
+        transform: scale(1);
         img {
             width: 8rem;
+        }
+        .chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            .chip {
+                margin: 4px 0 4px 8px;
+                padding: 0 12px;
+                font-size: .7rem;
+                line-height: 32px;
+                border-radius: 16px;
+                background-color: $primary-600;
+                color: $primary-50;
+            }
+        }
+        .date {
+            font-size: .8rem;
         }
         @media (max-width: 576px) {
             width: 8rem;
             img {
                 width: 6rem;
+            }
+        }
+        @media (min-width: 576px) {
+            &:hover {
+                transform: scale(1.05);
+                cursor: pointer;
             }
         }
     }

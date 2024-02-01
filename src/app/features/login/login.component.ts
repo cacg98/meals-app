@@ -22,7 +22,7 @@ import { RecordsService } from '../../common/services/records/records.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export default class LoginComponent {
   private formBuilder = inject(FormBuilder)
   private authSerive = inject(AuthService)
   private authTokensSerive = inject(AuthTokensService)

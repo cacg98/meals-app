@@ -5,12 +5,13 @@ import { recipeResolver } from './common/resolvers/recipe/recipe.resolver';
 export const routes: Routes = [
     {
         path: 'login', 
-        loadComponent: () => import('./features/login/login.component').then(comp => comp.LoginComponent)
+        loadComponent: () => import('./features/login/login.component')
     },
     {
         path: '',
-        loadComponent: () => import('./core/components/layout/layout.component').then(comp => comp.LayoutComponent),
-        loadChildren: () => [
+        canActivate: [authGuard],
+        loadComponent: () => import('./core/components/layout/layout.component'),
+        children: [
             {
                 path: '', 
                 pathMatch: 'full', 
@@ -18,15 +19,18 @@ export const routes: Routes = [
             },
             {
                 path: 'home', 
-                canActivate: [authGuard], 
-                loadComponent: () => import('./features/home/home.component').then(comp => comp.HomeComponent)
+                loadComponent: () => import('./features/home/home.component')
             },
             {
-                path: 'recipes/:path', 
-                canActivate: [authGuard], 
+                path: 'recipes/:path',
                 resolve: {recipe: recipeResolver}, 
-                loadComponent: () => import('./features/recipe-detail/recipe-detail.component').then(comp => comp.RecipeDetailComponent)
-            }
+                loadComponent: () => import('./features/recipe-detail/recipe-detail.component')
+            },
         ]
-    }
+    },
+    {
+        path: '**', 
+        pathMatch: 'full', 
+        redirectTo: 'home'
+    },
 ];

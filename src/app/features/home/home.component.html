@@ -65,14 +65,14 @@
 
 <div class="container-records">
   @for (record of records(); track record._id) {
-    <div class="record-card">
+    <div matRipple class="record-card" (click)="searchRecord(record.ingredients)">
       <img [src]="recipeImg(record.image)" alt="">
-      <mat-chip-set role="list">
+      <div class="chips-container">
         @for (ingredient of record.ingredients; track ingredient) {
-          <mat-chip role="listitem">{{ingredient}}</mat-chip>
+          <span class="chip">{{ingredient}}</span>
         }
-      </mat-chip-set>
-      <span>{{ record.date | date }}</span>
+      </div>
+      <span class="date">{{ record.date | date:'short' }}</span>
     </div>
   }
 </div>
