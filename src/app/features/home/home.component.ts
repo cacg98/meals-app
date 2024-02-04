@@ -46,7 +46,6 @@ export default class HomeComponent {
 
   loading: boolean = false;
   firstSearch: boolean = true;
-  showingPlaceholderImg: boolean = true;
 
   afterInitSwiper() {
     if (this.activeIndex() == 0) return;
@@ -62,7 +61,6 @@ export default class HomeComponent {
   search() {
     if (this.firstSearch) this.firstSearch = false;
     this.loading = true;
-    this.showingPlaceholderImg = true;
     this.recipes.set([]);
     this.mealsService.searchByIngredients(this.ingredients().join(',')).subscribe({
       next: res => {

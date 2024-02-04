@@ -13,19 +13,12 @@
   >
     @for (recipe of recipes(); track recipe.name; let i = $index) {
       <ng-template swiperSlide>
+
+        <!-- TODO componentizar recipe-card -->
+
         <div class="recipe-card">
           <p class="name">{{recipe.name}}</p>
-          <img
-            [ngStyle]="{'display': showingPlaceholderImg ? '' : 'none'}"
-            src="assets/images/placeholder-image.webp"
-            alt=""
-          >
-          <img
-            [ngStyle]="{'display': showingPlaceholderImg ? 'none' : ''}"
-            [src]="recipeImg(recipe.image)"
-            (load)="showingPlaceholderImg = false"
-            alt=""
-          >
+          <img [src]="recipeImg(recipe.image)" alt="">
           <div class="info">
             <div class="item">
               <span class="title">Level</span>
@@ -51,7 +44,8 @@
 } @else {
   <div class="container-placeholder">
     @if (firstSearch) {
-      search
+      <span class="title">¡Busca recetas con los ingredientes que quieras!</span>
+      <img class="placeholder-img" src="assets\images\chefs.png" alt="">
     } @else if (loading) {
       <img class="placeholder-gif" src="assets\images\loading-black.gif" alt="">
     } @else {
@@ -63,16 +57,28 @@
   </div>
 }
 
+<h3 class="section-title">Últimas 10 búsquedas</h3>
+
 <div class="container-records">
-  @for (record of records(); track record._id) {
-    <div matRipple class="record-card" (click)="searchRecord(record.ingredients)">
-      <img [src]="recipeImg(record.image)" alt="">
-      <div class="chips-container">
-        @for (ingredient of record.ingredients; track ingredient) {
-          <span class="chip">{{ingredient}}</span>
-        }
+  @if (records().length) {
+    @for (record of records(); track record._id) {
+  
+      <!-- TODO componentizar record-card -->
+  
+      <div matRipple class="record-card" (click)="searchRecord(record.ingredients)">
+        <img [src]="recipeImg(record.image)" alt="">
+        <div class="chips-container">
+          @for (ingredient of record.ingredients; track ingredient) {
+            <span class="chip">{{ingredient}}</span>
+          }
+        </div>
+        <span class="date">{{ record.date | date:'short' }}</span>
       </div>
-      <span class="date">{{ record.date | date:'short' }}</span>
+    }
+  } @else {
+    <div class="container-placeholder">
+      <span class="title" style="top: 3rem;">Aún no has buscado recetas</span>
+      <img class="placeholder-img" src="assets\images\books.png" alt="">
     </div>
   }
 </div>
