@@ -1,6 +1,6 @@
 <div class="search">
   <app-ingredients-input [ingredients]="ingredients()" (ingredientsChange)="ingredients.set($event)" />
-  <button mat-stroked-button color="primary" [disabled]="!ingredients().length" (click)="search()">Search recipe</button>
+  <button mat-stroked-button color="primary" [disabled]="!ingredients().length" (click)="search()">Buscar recetas</button>
 </div>
 
 @if (recipes().length) {
@@ -21,11 +21,11 @@
           <img [src]="recipeImg(recipe.image)" alt="">
           <div class="info">
             <div class="item">
-              <span class="title">Level</span>
+              <span class="title">Dificultad</span>
               <span>{{recipe.info[0]}}</span>
             </div>
             <div class="item">
-              <span class="title">Time</span>
+              <span class="title">Tiempo</span>
               <span>{{recipe.info[1]}}</span>
             </div>
           </div>
@@ -35,7 +35,7 @@
             routerLinkActive="router-link-active"
             [routerLink]="['/recipes', recipe.anchor]"
           >
-            View recipe
+            Ver receta
           </button>
         </div>
       </ng-template>
@@ -44,14 +44,14 @@
 } @else {
   <div class="container-placeholder">
     @if (firstSearch) {
-      <span class="title">¡Busca recetas con los ingredientes que quieras!</span>
+      <span class="title">¡Busca todo tipo de recetas!</span>
       <img class="placeholder-img" src="assets\images\chefs.png" alt="">
     } @else if (loading) {
       <img class="placeholder-gif" src="assets\images\loading-black.gif" alt="">
     } @else {
       <div>
         <img class="placeholder-gif" src="assets\images\not-found-black.gif" alt="">
-        <p style="text-align: center; margin-bottom: 0;">Not found</p>
+        <p style="text-align: center; margin-bottom: 0;">No se encontraron recetas</p>
       </div>
     }
   </div>
