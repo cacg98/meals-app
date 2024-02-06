@@ -82,8 +82,6 @@ export default class LoginComponent {
     'Wrong email or password': 'Correo electrónico o contraseña equivocada',
   };
 
-  // TODO: refactor onSubmit
-
   onSubmit() {
     this.loaderService.showSpinner();
 
@@ -136,10 +134,10 @@ export default class LoginComponent {
 
   getErrorMessage() {
     if (this.email!.hasError('required')) {
-      return 'You must enter a value';
+      return 'Debe ingresar un valor';
     }
 
-    return this.email!.hasError('errorEmail') ? 'Not a valid email' : '';
+    return this.email!.hasError('errorEmail') ? 'Correo electrónico inválido' : '';
   }
 
   changeForm() {
