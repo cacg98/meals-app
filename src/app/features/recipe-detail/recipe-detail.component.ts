@@ -1,12 +1,24 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  WritableSignal,
+  inject,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 
 import { environment } from '../../../environments/environment.development';
 import { IRecipe } from '../../common/interfaces/meals-responses';
+import { IFavorite } from '../../common/interfaces/favorite';
 import { LoaderService } from '../../common/services/loader/loader.service';
+import { FavoritesService } from '../../common/services/favorites/favorites.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -14,17 +26,18 @@ import { LoaderService } from '../../common/services/loader/loader.service';
   imports: [CommonModule, MatIconModule],
   templateUrl: './recipe-detail.component.html',
   styleUrl: './recipe-detail.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class RecipeDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('details') details!: ElementRef;
 
   private route = inject(ActivatedRoute);
   private loaderService = inject(LoaderService);
+  private favoritesService = inject(FavoritesService);
 
   recipe!: IRecipe;
   showingPlaceholderImg: boolean = true;
-  bgImages: { url: string, top: string }[] = [];
+  bgImages: { url: string; top: string }[] = [];
   bgImagesUrls: string[] = [
     'assets/images/aguacate.webp',
     'assets/images/aji.webp',
@@ -63,14 +76,25 @@ export default class RecipeDetailComponent implements OnInit, AfterViewInit {
     'assets/images/tomate.webp',
     'assets/images/zanahoria.webp',
   ];
+  isFavorite: WritableSignal<boolean> = signal(false);
+  loadingFavorite: boolean = true;
+  anchor!: string;
 
   ngOnInit(): void {
-    this.route.data.subscribe(
-      ({recipe}) => {
-        this.recipe = recipe;
-        Promise.resolve(null).then(() => this.loaderService.hideSpinner());
-      }
-    )
+    this.route.data.subscribe(({ recipe }) => {
+      this.recipe = recipe;
+      Promise.resolve(null).then(() => this.loaderService.hideSpinner());
+    });
+    this.anchor = this.route.snapshot.params['path'];
+    this.favoritesService.isFavorite(this.anchor).subscribe({
+      next: (res) => {
+        this.isFavorite.set(res);
+        this.loadingFavorite = false;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   ngAfterViewInit(): void {
@@ -81,7 +105,7 @@ export default class RecipeDetailComponent implements OnInit, AfterViewInit {
       const randIndex = this.randomNumber(this.bgImagesUrls.length);
       this.bgImages.push({
         url: this.bgImagesUrls[randIndex],
-        top: `${top}px`
+        top: `${top}px`,
       });
       top += 124;
       this.bgImagesUrls.splice(randIndex, 1);
@@ -96,4 +120,28 @@ export default class RecipeDetailComponent implements OnInit, AfterViewInit {
     return Math.floor(Math.random() * max);
   }
 
+  changeFavorite(isFavorite: boolean) {
+    if (this.loadingFavorite) return;
+    this.loadingFavorite = true;
+    let observable = this.favoritesService.delete(this.anchor);
+    if (isFavorite) {
+      const favorite: IFavorite = {
+        anchor: this.anchor,
+        difficulty: this.recipe.difficulty,
+        image: this.recipe.image,
+        name: this.recipe.name,
+        time: this.recipe.time,
+      };
+      observable = this.favoritesService.create(favorite);
+    }
+    observable.subscribe({
+      next: (res) => {
+        this.isFavorite.set(isFavorite);
+        this.loadingFavorite = false;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 }

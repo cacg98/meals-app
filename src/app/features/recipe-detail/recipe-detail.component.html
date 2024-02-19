@@ -26,7 +26,14 @@
     [ngStyle]="{ top: bgImage.top }"
   />
   }
-  <p class="name">{{ recipe.name }}</p>
+  <div class="container-name">
+    <p class="name">{{ recipe.name }}</p>
+    @if (isFavorite()) {
+      <mat-icon (click)="changeFavorite(false)">favorite</mat-icon>
+    } @else {
+      <mat-icon (click)="changeFavorite(true)">favorite_border</mat-icon>
+    }
+  </div>
   <div class="info">
     @if (recipe.difficulty) {
     <div class="item">

@@ -1,6 +1,6 @@
 <div class="search">
   <app-ingredients-input [ingredients]="ingredients()" (ingredientsChange)="ingredients.set($event)" />
-  <button mat-stroked-button color="primary" [disabled]="!ingredients().length" (click)="search()">Buscar recetas</button>
+  <button mat-stroked-button color="primary" [disabled]="!ingredients().length" (click)="search()">Buscar</button>
 </div>
 
 @if (recipes().length) {
@@ -29,14 +29,14 @@
               <span>{{recipe.info[1]}}</span>
             </div>
           </div>
-          <button
+          <a
             mat-button
             color="primary"
             routerLinkActive="router-link-active"
             [routerLink]="['/recipes', recipe.anchor]"
           >
-            Ver receta
-          </button>
+            Ver más
+          </a>
         </div>
       </ng-template>
     }
@@ -44,7 +44,7 @@
 } @else {
   <div class="container-placeholder">
     @if (firstSearch) {
-      <span class="title">¡Busca todo tipo de recetas!</span>
+      <span class="title">¡Encuentra todo tipo de recetas!</span>
       <img class="placeholder-img" src="assets\images\chefs.png" alt="">
     } @else if (loading) {
       <img class="placeholder-gif" src="assets\images\loading-black.gif" alt="">

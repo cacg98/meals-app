@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import * as favoritesEndpoints from '../../endpoints/favorites';
+import * as interfaces from '../../interfaces/favorite';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class FavoritesService {
     return this._httpClient.get<boolean>(favoritesEndpoints.IS_FAVORITE + anchor);
   }
 
-  create(favorite: any) {
+  create(favorite: interfaces.IFavorite) {
     return this._httpClient.post<{}>(favoritesEndpoints.CREATE, favorite);
   }
 

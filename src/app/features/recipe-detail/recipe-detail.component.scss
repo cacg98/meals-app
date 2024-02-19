@@ -48,9 +48,18 @@
             transform: rotate(15deg);
         }
     }
-    .name {
-        font-size: 1.25rem;
-        color: $primary-900;
+    .container-name {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        .name {
+            font-size: 1.25rem;
+            color: $primary-900;
+        }
+        mat-icon {
+            color: #D32F2F;
+            cursor: pointer;
+        }
     }
     .list {
         width: 50%;
