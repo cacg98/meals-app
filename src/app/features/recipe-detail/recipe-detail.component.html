@@ -29,7 +29,7 @@
   <div class="container-name">
     <p class="name">{{ recipe.name }}</p>
     @if (isFavorite()) {
-      <mat-icon (click)="changeFavorite(false)">favorite</mat-icon>
+      <mat-icon [@pulse] (click)="changeFavorite(false)">favorite</mat-icon>
     } @else {
       <mat-icon (click)="changeFavorite(true)">favorite_border</mat-icon>
     }
