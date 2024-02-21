@@ -11,14 +11,6 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import {
-  trigger,
-  style,
-  animate,
-  transition,
-  keyframes,
-  AUTO_STYLE,
-} from '@angular/animations';
 
 import { MatIconModule } from '@angular/material/icon';
 
@@ -27,6 +19,7 @@ import { IRecipe } from '../../common/interfaces/meals-responses';
 import { IFavorite } from '../../common/interfaces/favorite';
 import { LoaderService } from '../../common/services/loader/loader.service';
 import { FavoritesService } from '../../common/services/favorites/favorites.service';
+import { pulseAnimation } from '../../common/animations/pulse';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -35,29 +28,7 @@ import { FavoritesService } from '../../common/services/favorites/favorites.serv
   templateUrl: './recipe-detail.component.html',
   styleUrl: './recipe-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('pulse', [
-      transition(':enter', [
-        animate(
-          '250ms',
-          keyframes([
-            style({
-              visibility: AUTO_STYLE,
-              transform: 'scale3d(1, 1, 1)',
-              easing: 'ease',
-              offset: 0,
-            }),
-            style({
-              transform: 'scale3d(1.2, 1.2, 1.2)',
-              easing: 'ease',
-              offset: 0.5,
-            }),
-            style({ transform: 'scale3d(1, 1, 1)', easing: 'ease', offset: 1 }),
-          ])
-        ),
-      ]),
-    ]),
-  ],
+  animations: [pulseAnimation],
 })
 export default class RecipeDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('details') details!: ElementRef;
