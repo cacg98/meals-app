@@ -9,6 +9,10 @@ import * as interfaces from '../../interfaces/favorite';
 export class FavoritesService {
   private _httpClient = inject(HttpClient);
 
+  listFavorites() {
+    return this._httpClient.get<interfaces.IFavorite[]>(favoritesEndpoints.LIST);
+  }
+
   isFavorite(anchor: string) {
     return this._httpClient.get<boolean>(favoritesEndpoints.IS_FAVORITE + anchor);
   }

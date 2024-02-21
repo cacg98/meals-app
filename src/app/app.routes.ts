@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './common/guards/auth/auth.guard';
 import { recipeResolver } from './common/resolvers/recipe/recipe.resolver';
+import { favoritesResolver } from './common/resolvers/favorites/favorites.resolver';
 
 export const routes: Routes = [
   {
@@ -26,6 +27,11 @@ export const routes: Routes = [
         resolve: { recipe: recipeResolver },
         loadComponent: () =>
           import('./features/recipe-detail/recipe-detail.component'),
+      },
+      {
+        path: 'favorites',
+        resolve: { favorites: favoritesResolver },
+        loadComponent: () => import('./features/favorites/favorites.component'),
       },
     ],
   },
