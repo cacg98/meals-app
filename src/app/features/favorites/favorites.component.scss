@@ -1,0 +1,24 @@
+@import "../../../assets/scss/variables.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - var(--mat-toolbar-standard-height) - $footer-height);
+  .title {
+    font-size: 1.35rem;
+    color: $primary-600;
+  }
+  img {
+    height: 50%;
+    width: 50%;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 599px) {
+  .wrapper {
+    height: calc(100vh - var(--mat-toolbar-mobile-height) - $footer-height);
+  }
+}

@@ -1,21 +1,25 @@
-@import '../../../../assets/scss/colors.scss';
+@import "../../../../assets/scss/variables.scss";
 
 .spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 footer {
-    background-color: $primary-400;
-    color: $primary-50;
-    padding: 2rem;
-    text-align: center;
-    p {
-        margin: 0 0 .5rem;
-    }
-    p:last-child {
-        margin: 2rem 0 0;
-    }
-    a, a:active {
-        color: $primary-900;
-    }
+  background-color: $primary-400;
+  color: $primary-50;
+  text-align: center;
+  height: $footer-height;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  p {
+    margin: 0 0 0.5rem;
+  }
+  p:last-child {
+    margin: 2rem 0 0;
+  }
+  a,
+  a:active {
+    color: $primary-900;
+  }
 }
