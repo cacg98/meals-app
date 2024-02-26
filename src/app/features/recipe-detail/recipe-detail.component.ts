@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { MatIconModule } from '@angular/material/icon';
 
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 import { IRecipe } from '../../common/interfaces/meals-responses';
 import { IFavorite } from '../../common/interfaces/favorite';
 import { LoaderService } from '../../common/services/loader/loader.service';

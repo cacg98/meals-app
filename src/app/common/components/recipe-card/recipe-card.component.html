@@ -1,0 +1,22 @@
+<div class="recipe-card">
+  <p class="name">{{ recipe.name }}</p>
+  <img [src]="recipeImg(recipe.image)" alt="" />
+  <div class="info">
+    @for (item of recipe.info; track i; let i = $index) {
+      <div class="item">
+        <span class="title">{{
+          recipe.info[i].includes("min") ? "Tiempo" : "Dificultad"
+        }}</span>
+        <span>{{ recipe.info[i] }}</span>
+      </div>
+    }
+  </div>
+  <a
+    mat-button
+    color="primary"
+    routerLinkActive="router-link-active"
+    [routerLink]="['/recipes', recipe.anchor]"
+  >
+    Ver más
+  </a>
+</div>

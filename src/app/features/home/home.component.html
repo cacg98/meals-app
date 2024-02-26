@@ -13,31 +13,7 @@
   >
     @for (recipe of recipes(); track recipe.name; let i = $index) {
       <ng-template swiperSlide>
-
-        <!-- TODO componentizar recipe-card -->
-
-        <div class="recipe-card">
-          <p class="name">{{recipe.name}}</p>
-          <img [src]="recipeImg(recipe.image)" alt="">
-          <div class="info">
-            <div class="item">
-              <span class="title">Dificultad</span>
-              <span>{{recipe.info[0]}}</span>
-            </div>
-            <div class="item">
-              <span class="title">Tiempo</span>
-              <span>{{recipe.info[1]}}</span>
-            </div>
-          </div>
-          <a
-            mat-button
-            color="primary"
-            routerLinkActive="router-link-active"
-            [routerLink]="['/recipes', recipe.anchor]"
-          >
-            Ver más
-          </a>
-        </div>
+        <app-recipe-card [recipe]="recipe" />
       </ng-template>
     }
   </swiper>
