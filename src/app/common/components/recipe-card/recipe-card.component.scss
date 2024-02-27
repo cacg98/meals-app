@@ -1,32 +1,29 @@
 @import "../../../../assets/scss/variables.scss";
 
 .recipe-card {
-  height: 100%;
-  width: 100%;
   border-radius: 1rem;
   background-color: $primary-50;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  gap: 1rem;
   .name {
-    margin: 1rem 0.75rem 0;
+    height: 2rem;
+    margin: 1rem 1rem 0;
     text-align: center;
+    text-wrap: balance;
+    display: flex;
+    align-items: center;
     color: $primary-900;
   }
   img {
-    height: 12rem;
-    width: 100%;
-    object-fit: contain;
-    @media (max-width: 576px) {
-      height: 8rem;
-    }
+    width: 80%;
   }
   .info {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     font-size: 0.8rem;
     .item {
       text-align: center;
@@ -39,6 +36,6 @@
     }
   }
   a {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 }

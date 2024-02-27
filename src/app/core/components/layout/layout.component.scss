@@ -4,6 +4,17 @@
   flex: 1 1 auto;
 }
 
+.container-body {
+  display: flow-root;
+  min-height: calc(100vh - var(--mat-toolbar-standard-height) - $footer-height);
+}
+
+@media (max-width: 599px) {
+  .container-body {
+    min-height: calc(100vh - var(--mat-toolbar-mobile-height) - $footer-height);
+  }
+}
+
 footer {
   background-color: $primary-400;
   color: $primary-50;

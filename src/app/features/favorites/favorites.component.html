@@ -1,4 +1,12 @@
-<div class="wrapper">
-  <span class="title">Aún no tienes favoritos</span>
-  <img src="assets/images/meals.png" alt="" />
-</div>
+@if (recipes.length) {
+  <div class="favorites">
+    @for (recipe of recipes; track $index) {
+    <app-recipe-card [recipe]="recipe" />
+    }
+  </div>
+} @else {
+  <div class="container-empty">
+    <span class="title">Aún no tienes favoritos</span>
+    <img src="assets/images/meals.png" alt="" />
+  </div>
+}

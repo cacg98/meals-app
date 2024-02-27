@@ -1,12 +1,8 @@
 @import "../../../assets/scss/variables.scss";
 
 .swiper {
-  height: 24rem;
+  height: 26rem;
   width: 16rem;
-  @media (max-width: 576px) {
-    height: 21rem;
-    width: 13rem;
-  }
 }
 
 .search {
@@ -20,9 +16,10 @@
 }
 
 .container-placeholder {
-  height: 24rem;
+  height: 26rem;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -37,12 +34,6 @@
     top: 0;
     font-size: 1.35rem;
     color: $primary-600;
-  }
-  @media (max-width: 576px) {
-    height: 21rem;
-    .title {
-      font-size: 1.15rem;
-    }
   }
 }
 
@@ -103,4 +94,17 @@
 .section-title {
   margin-left: 1rem;
   color: $primary-800;
+}
+
+@media (max-width: 576px) {
+  .swiper {
+    height: 23rem;
+    width: 13rem;
+  }
+  .container-placeholder {
+    height: 21rem;
+    .title {
+      font-size: 1.15rem;
+    }
+  }
 }

@@ -1,13 +1,13 @@
 <div class="recipe-card">
-  <p class="name">{{ recipe.name }}</p>
+  <div class="name">{{ recipe.name }}</div>
   <img [src]="recipeImg(recipe.image)" alt="" />
   <div class="info">
-    @for (item of recipe.info; track i; let i = $index) {
+    @for (item of recipe.info; track $index) {
       <div class="item">
         <span class="title">{{
-          recipe.info[i].includes("min") ? "Tiempo" : "Dificultad"
+          item.includes("min") ? "Tiempo" : "Dificultad"
         }}</span>
-        <span>{{ recipe.info[i] }}</span>
+        <span>{{ item }}</span>
       </div>
     }
   </div>

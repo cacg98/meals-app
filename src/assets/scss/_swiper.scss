@@ -1,0 +1,31 @@
+@import "../../../node_modules/swiper/swiper.scss";
+@import "../../../node_modules/swiper/modules/navigation/navigation.scss";
+@import "../../../node_modules/swiper/modules/pagination/pagination.scss";
+@import "../../../node_modules/swiper/modules/effect-cards/effect-cards.scss";
+
+:root {
+  --swiper-theme-color: #ff6134;
+  --swiper-navigation-size: 1rem;
+}
+
+.swiper-slide {
+  height: fit-content;
+}
+
+.swiper-slide-shadow {
+  border-radius: 1rem;
+}
+
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: 0;
+}
+
+.swiper-button-prev {
+  right: auto;
+  left: -3rem;
+}
+
+.swiper-button-next {
+  left: auto;
+  right: -3rem;
+}

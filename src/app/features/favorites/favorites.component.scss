@@ -1,6 +1,6 @@
 @import "../../../assets/scss/variables.scss";
 
-.wrapper {
+.container-empty {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,8 +17,39 @@
   }
 }
 
+.favorites {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin: 2rem;
+}
+
 @media (max-width: 599px) {
-  .wrapper {
+  .container-empty {
     height: calc(100vh - var(--mat-toolbar-mobile-height) - $footer-height);
+  }
+}
+
+@media (min-width: 768px) {
+  .favorites {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .favorites {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .favorites {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 1400px) {
+  .favorites {
+    grid-template-columns: repeat(6, 1fr);
   }
 }
