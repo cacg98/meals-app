@@ -20,7 +20,6 @@ export default class FavoritesComponent implements OnInit {
   recipes: IPreviewRecipe[] = [];
 
   ngOnInit(): void {
-    // TODO revisar crear favorito sin difficulty o time
     this.route.data.subscribe(({ favorites }) => {
       this.recipes = (favorites as IFavorite[]).map((favorite) => {
         const info = [];

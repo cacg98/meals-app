@@ -1,8 +1,8 @@
 @import "../../../assets/scss/variables.scss";
 
 .swiper {
-  height: 26rem;
-  width: 16rem;
+  height: 23rem;
+  width: 13rem;
 }
 
 .search {
@@ -16,7 +16,7 @@
 }
 
 .container-placeholder {
-  height: 26rem;
+  height: 23rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -42,7 +42,7 @@
   display: flex;
   flex-wrap: wrap;
   .record-card {
-    width: 10rem;
+    width: 8rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,8 +57,12 @@
     -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
     transition: transform ease-in-out 200ms;
     transform: scale(1);
+    &:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
     img {
-      width: 8rem;
+      width: 6rem;
     }
     .chips-container {
       display: flex;
@@ -76,16 +80,10 @@
     .date {
       font-size: 0.8rem;
     }
-    @media (max-width: 576px) {
-      width: 8rem;
-      img {
-        width: 6rem;
-      }
-    }
     @media (min-width: 576px) {
-      &:hover {
-        transform: scale(1.05);
-        cursor: pointer;
+      width: 10rem;
+      img {
+        width: 8rem;
       }
     }
   }
@@ -96,13 +94,13 @@
   color: $primary-800;
 }
 
-@media (max-width: 576px) {
+@media (min-width: 768px) {
   .swiper {
-    height: 23rem;
-    width: 13rem;
+    height: 30rem;
+    width: 20rem;
   }
   .container-placeholder {
-    height: 21rem;
+    height: 30rem;
     .title {
       font-size: 1.15rem;
     }

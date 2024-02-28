@@ -7,6 +7,9 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  @media (min-width: 576px) {
+    gap: 1.5rem;
+  }
   .name {
     height: 2rem;
     margin: 1rem 1rem 0;
