@@ -17,12 +17,13 @@
     text-wrap: balance;
     display: flex;
     align-items: center;
-    color: $primary-900;
+    color: $primary-400;
   }
   img {
     width: 80%;
   }
   .info {
+    height: 2rem;
     width: 100%;
     display: flex;
     align-items: center;
@@ -34,7 +35,7 @@
         display: block;
       }
       .title {
-        color: $primary-900;
+        color: $primary-400;
       }
     }
   }

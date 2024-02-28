@@ -31,10 +31,12 @@
   </div>
 }
 
-<h3 class="section-title">Últimas 10 búsquedas</h3>
+<p class="section-title">Últimas 10 búsquedas</p>
 
-<div class="container-records">
-  @if (records().length) {
+<!-- TODO paginar records -->
+
+@if (records().length) {
+  <div class="items-grid">
     @for (record of records(); track record._id) {
   
       <!-- TODO componentizar record-card -->
@@ -49,10 +51,10 @@
         <span class="date">{{ record.date | date:'short' }}</span>
       </div>
     }
-  } @else {
-    <div class="container-placeholder">
-      <span class="title" style="top: 3rem;">Aún no has buscado recetas</span>
-      <img class="placeholder-img" src="assets\images\books.png" alt="">
-    </div>
-  }
-</div>
+  </div>
+} @else {
+  <div class="container-placeholder">
+    <span class="title" style="top: 3rem;">Aún no has buscado recetas</span>
+    <img class="placeholder-img" src="assets\images\books.png" alt="">
+  </div>
+}
