@@ -1,25 +1,49 @@
-<mat-toolbar color="primary">
-  <!-- <span>Meals App</span> -->
-  <button mat-icon-button aria-label="Home icon" routerLink="home">
-    <mat-icon>home</mat-icon>
-  </button>
-  <span class="spacer"></span>
-  <button mat-icon-button aria-label="Heart icon" routerLink="favorites">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button aria-label="Logout icon" (click)="logout()">
-    <mat-icon>logout</mat-icon>
-  </button>
-</mat-toolbar>
+<mat-sidenav-container>
+  <!-- <mat-sidenav mode="side" opened>Sidenav content</mat-sidenav> -->
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <!-- <span>Meals App</span> -->
+      <button mat-icon-button aria-label="Home icon" routerLink="home">
+        <mat-icon>home</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="changeDarkMode()">
+        @if (darkTheme()) {
+          <mat-icon>light_mode</mat-icon>
+        } @else {
+          <mat-icon>dark_mode</mat-icon>
+        }
+      </button>
+      <button mat-icon-button aria-label="Heart icon" routerLink="favorites">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Logout icon" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
 
-<div class="container-body">
-  <router-outlet></router-outlet>
-</div>
+    <div class="container-body">
+      <router-outlet></router-outlet>
+    </div>
 
-<footer>
-  <p style="text-decoration: underline;">Autor</p>
-  <p>Carlos Colmenares</p>
-  <p style="text-decoration: underline;">Contacto</p>
-  <p><a style="text-decoration: none;" href="mailto:cacg98@gmail.com">{{'cacg98@gmail.com'}}</a></p>
-  <p>Todas las recetas de esta web provienen de <a style="text-decoration: none;" href="https://www.recetasnestle.com.ve/" target="_blank">recetasnestle.com.ve</a></p>
-</footer>
+    <footer>
+      <p style="text-decoration: underline">Autor</p>
+      <p>Carlos Colmenares</p>
+      <p style="text-decoration: underline">Contacto</p>
+      <p>
+        <a style="text-decoration: none" href="mailto:cacg98@gmail.com">{{
+          "cacg98@gmail.com"
+        }}</a>
+      </p>
+      <p>
+        Todas las recetas de esta web provienen de
+        <a
+          style="text-decoration: none"
+          href="https://www.recetasnestle.com.ve/"
+          target="_blank"
+          >recetasnestle.com.ve</a
+        >
+      </p>
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

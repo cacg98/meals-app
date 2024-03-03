@@ -1,6 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, HostBinding, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -16,11 +17,31 @@ import { StateService } from './common/services/state/state.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
+  @HostBinding('class') get class() {
+    return this.darkTheme() ? 'dark-theme' : '';
+  }
+
   private loaderService = inject(LoaderService);
   private recordsService = inject(RecordsService);
   private stateService = inject(StateService);
+  private mediaMatcher = inject(MediaMatcher);
+
+  get darkTheme() {
+    return this.stateService.darkTheme;
+  }
 
   title = 'meals-app';
+
+  constructor() {
+    const theme = localStorage.getItem('theme');
+    if (
+      (theme && theme == 'dark') ||
+      (!theme &&
+        this.mediaMatcher.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      this.darkTheme.set(true);
+    }
+  }
 
   ngOnInit(): void {
     if (localStorage.getItem('accessToken')) {

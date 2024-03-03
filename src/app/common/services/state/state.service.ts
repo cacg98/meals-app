@@ -16,6 +16,8 @@ export class StateService {
 
   records: WritableSignal<IRecord[]> = signal([]);
 
+  darkTheme: WritableSignal<boolean> = signal(false);
+
   resetState() {
     this.ingredients.set([]);
     this.recipes.set([]);
