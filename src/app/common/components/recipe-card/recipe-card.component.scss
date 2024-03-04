@@ -1,8 +1,5 @@
-@import "../../../../assets/scss/variables.scss";
-
 .recipe-card {
   border-radius: 1rem;
-  background-color: $primary-50;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,7 +14,6 @@
     text-wrap: balance;
     display: flex;
     align-items: center;
-    color: $primary-400;
   }
   img {
     width: 80%;
@@ -33,9 +29,6 @@
       text-align: center;
       span {
         display: block;
-      }
-      .title {
-        color: $primary-400;
       }
     }
   }

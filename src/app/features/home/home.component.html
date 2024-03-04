@@ -1,6 +1,6 @@
 <div class="search">
   <app-ingredients-input [ingredients]="ingredients()" (ingredientsChange)="ingredients.set($event)" />
-  <button mat-stroked-button color="primary" [disabled]="!ingredients().length" (click)="search()">Buscar</button>
+  <button mat-stroked-button color="accent" [disabled]="!ingredients().length" (click)="search()">Buscar</button>
 </div>
 
 @if (recipes().length) {
