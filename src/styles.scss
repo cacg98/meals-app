@@ -4,6 +4,8 @@
 @use "./assets/scss/themes/recipe-card-theme" as recipe-card;
 @use "./assets/scss/themes/footer-theme" as footer;
 @use "./assets/scss/themes/record-card-theme" as record-card;
+@use "./assets/scss/themes/login-theme" as login;
+@use "./assets/scss/themes/general-theme" as general;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -16,6 +18,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $meals-app-primary-light: mat.define-palette($primary-palette, 400);
+$meals-app-accent-light: mat.define-palette($primary-palette, 900);
 $meals-app-primary-dark: mat.define-palette($primary-palette, 800);
 $meals-app-accent-dark: mat.define-palette($primary-palette, 100);
 
@@ -28,7 +31,7 @@ $meals-app-light-theme: mat.define-light-theme(
   (
     color: (
       primary: $meals-app-primary-light,
-      accent: $meals-app-primary-light,
+      accent: $meals-app-accent-light,
       warn: $meals-app-warn,
     ),
   )
@@ -51,12 +54,16 @@ $meals-app-dark-theme: mat.define-dark-theme(
 @include recipe-card.color($meals-app-light-theme);
 @include footer.color($meals-app-light-theme);
 @include record-card.color($meals-app-light-theme);
+@include login.color($meals-app-light-theme);
+@include general.color($meals-app-light-theme);
 
 .dark-theme {
   @include mat.all-component-colors($meals-app-dark-theme);
   @include recipe-card.color-dark($meals-app-dark-theme);
-  @include footer.color($meals-app-dark-theme);
+  @include footer.color-dark($meals-app-dark-theme);
   @include record-card.color-dark($meals-app-dark-theme);
+  @include login.color-dark($meals-app-dark-theme);
+  @include general.color($meals-app-dark-theme);
 }
 
 /* You can add global styles to this file, and also import other style files */

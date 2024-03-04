@@ -1,0 +1,8 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@mixin color($theme) {
+  .contrast-color {
+    color: mat.get-theme-color($theme, accent, default);
+  }
+}

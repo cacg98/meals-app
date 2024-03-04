@@ -3,9 +3,9 @@
 
 @mixin color($theme) {
   .recipe-card {
-    background-color: mat.get-theme-color($theme, primary, 100);
+    background-color: mat.get-theme-color($theme, primary, 50);
     .name, .title {
-      color: mat.get-theme-color($theme, primary, default);
+      color: mat.get-theme-color($theme, accent, default);
     }
   }
 }

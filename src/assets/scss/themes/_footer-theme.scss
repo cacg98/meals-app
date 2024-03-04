@@ -4,9 +4,21 @@
 @mixin color($theme) {
   footer {
     background-color: mat.get-theme-color($theme, primary, default);
+    color: #000000de;
     a,
     a:active {
-      color: mat.get-theme-color($theme, primary, 100);
+      color: #000000de;
+    }
+  }
+}
+
+@mixin color-dark($theme) {
+  footer {
+    background-color: mat.get-theme-color($theme, primary, default);
+    color: white;
+    a,
+    a:active {
+      color: white;
     }
   }
 }

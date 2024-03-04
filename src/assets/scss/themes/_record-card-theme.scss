@@ -3,9 +3,10 @@
 
 @mixin color($theme) {
   .record-card {
-    background-color: mat.get-theme-color($theme, primary, 100);
+    background-color: mat.get-theme-color($theme, primary, 50);
     .chip {
       background-color: mat.get-theme-color($theme, primary, default);
+      color: #000000de;
     }
   }
 }
@@ -15,6 +16,7 @@
     background-color: mat.get-theme-color($theme, background, card);
     .chip {
       background-color: mat.get-theme-color($theme, primary, default);
+      color: white;
     }
   }
 }

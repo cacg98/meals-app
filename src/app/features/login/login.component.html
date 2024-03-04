@@ -1,14 +1,14 @@
-<div class="background">
+<div class="login">
   <div class="card">
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-      <mat-form-field>
+      <mat-form-field color="accent">
         <mat-label>Correo electrónico</mat-label>
         <input type="email" matInput formControlName="email" />
         @if (email!.invalid) {
         <mat-error>{{ getErrorMessage() }}</mat-error>
         }
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field color="accent">
         <mat-label>Contraseña</mat-label>
         <input
           [type]="hide ? 'password' : 'text'"

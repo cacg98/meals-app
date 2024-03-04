@@ -27,36 +27,36 @@
   />
   }
   <div class="container-name">
-    <p class="name">{{ recipe.name }}</p>
+    <p class="name contrast-color">{{ recipe.name }}</p>
     @if (isFavorite()) {
-      <mat-icon [@pulse] (click)="changeFavorite(false)">favorite</mat-icon>
+      <mat-icon class="contrast-color" [@pulse] (click)="changeFavorite(false)">favorite</mat-icon>
     } @else {
-      <mat-icon (click)="changeFavorite(true)">favorite_border</mat-icon>
+      <mat-icon class="contrast-color" (click)="changeFavorite(true)">favorite_border</mat-icon>
     }
   </div>
   <div class="info">
     @if (recipe.difficulty) {
     <div class="item">
-      <mat-icon>soup_kitchen</mat-icon>
-      <span class="title">Dificultad</span>
+      <mat-icon class="contrast-color">soup_kitchen</mat-icon>
+      <span class="title contrast-color">Dificultad</span>
       <span>{{ recipe.difficulty }}</span>
     </div>
     } @if (recipe.serving) {
     <div class="item">
-      <mat-icon>people</mat-icon>
-      <span class="title">Porciones</span>
+      <mat-icon class="contrast-color">people</mat-icon>
+      <span class="title contrast-color">Porciones</span>
       <span>{{ recipe.serving }}</span>
     </div>
     } @if (recipe.time) {
     <div class="item">
-      <mat-icon>timer</mat-icon>
-      <span class="title">Tiempo</span>
+      <mat-icon class="contrast-color">timer</mat-icon>
+      <span class="title contrast-color">Tiempo</span>
       <span>{{ recipe.time }}</span>
     </div>
     }
   </div>
   <div class="list">
-    <p>Ingredientes</p>
+    <p class="contrast-color">Ingredientes</p>
     <ul>
       @for (ingredient of recipe.ingredients; track ingredient) {
       <li>{{ ingredient }}</li>
@@ -64,7 +64,7 @@
     </ul>
   </div>
   <div class="list">
-    <p>Pasos</p>
+    <p class="contrast-color">Pasos</p>
     <ul>
       @for (step of recipe.steps; track step) {
       <li>{{ step }}</li>

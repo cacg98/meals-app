@@ -57,6 +57,9 @@ export default class HomeComponent {
   get records() {
     return this.stateService.records;
   }
+  get darkTheme() {
+    return this.stateService.darkTheme();
+  }
 
   config: SwiperOptions = {
     navigation: true,
