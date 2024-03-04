@@ -16,8 +16,7 @@
 }
 
 footer {
-  background-color: $primary-400;
-  color: $primary-50;
+  color: white;
   text-align: center;
   height: $footer-height;
   display: flex;
@@ -28,9 +27,5 @@ footer {
   }
   p:last-child {
     margin: 2rem 0 0;
-  }
-  a,
-  a:active {
-    color: $primary-900;
   }
 }
