@@ -40,6 +40,10 @@ export class AppComponent implements OnInit {
         this.mediaMatcher.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
       this.darkTheme.set(true);
+      document.documentElement.style.setProperty(
+        '--swiper-theme-color',
+        '#ffc8b7'
+      );
     }
   }
 

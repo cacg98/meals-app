@@ -39,5 +39,16 @@ export default class LayoutComponent {
   changeDarkMode() {
     this.darkTheme.update((v) => !v);
     localStorage.setItem('theme', this.darkTheme() ? 'dark' : 'light');
+    if (this.darkTheme()) {
+      document.documentElement.style.setProperty(
+        '--swiper-theme-color',
+        '#ffc8b7'
+      );
+    } else {
+      document.documentElement.style.setProperty(
+        '--swiper-theme-color',
+        '#c81000'
+      );
+    }
   }
 }

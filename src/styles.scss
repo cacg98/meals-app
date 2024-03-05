@@ -50,6 +50,9 @@ $meals-app-dark-theme: mat.define-dark-theme(
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
+
+// TODO cambiar all-component-themes por solo los componentes usados
+
 @include mat.all-component-themes($meals-app-light-theme);
 @include recipe-card.color($meals-app-light-theme);
 @include footer.color($meals-app-light-theme);
