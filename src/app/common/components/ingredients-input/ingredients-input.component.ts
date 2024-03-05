@@ -1,9 +1,10 @@
 import {COMMA, ENTER, SPACE} from '@angular/cdk/keycodes';
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
+
 import {MatChipEditedEvent, MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {LiveAnnouncer} from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-ingredients-input',

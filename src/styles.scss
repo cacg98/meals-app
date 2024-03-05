@@ -51,9 +51,23 @@ $meals-app-dark-theme: mat.define-dark-theme(
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 
-// TODO cambiar all-component-themes por solo los componentes usados
-
 @include mat.all-component-themes($meals-app-light-theme);
+
+// material components
+
+// @include mat.core-theme($meals-app-light-theme);
+// @include mat.input-theme($meals-app-light-theme);
+// @include mat.button-theme($meals-app-light-theme);
+// @include mat.icon-theme($meals-app-light-theme);
+// @include mat.form-field-theme($meals-app-light-theme);
+// @include mat.button-toggle-theme($meals-app-light-theme);
+// @include mat.snack-bar-theme($meals-app-light-theme);
+// @include mat.progress-spinner-theme($meals-app-light-theme);
+// @include mat.chips-theme($meals-app-light-theme);
+// @include mat.toolbar-theme($meals-app-light-theme);
+// @include mat.sidenav-theme($meals-app-light-theme);
+
+// app components
 @include recipe-card.color($meals-app-light-theme);
 @include footer.color($meals-app-light-theme);
 @include record-card.color($meals-app-light-theme);
@@ -62,6 +76,22 @@ $meals-app-dark-theme: mat.define-dark-theme(
 
 .dark-theme {
   @include mat.all-component-colors($meals-app-dark-theme);
+
+  // material components
+
+  // @include mat.core-color($meals-app-dark-theme);
+  // @include mat.input-color($meals-app-dark-theme);
+  // @include mat.button-color($meals-app-dark-theme);
+  // @include mat.icon-color($meals-app-dark-theme);
+  // @include mat.form-field-color($meals-app-dark-theme);
+  // @include mat.button-toggle-color($meals-app-dark-theme);
+  // @include mat.snack-bar-color($meals-app-dark-theme);
+  // @include mat.progress-spinner-color($meals-app-dark-theme);
+  // @include mat.chips-color($meals-app-dark-theme);
+  // @include mat.toolbar-color($meals-app-dark-theme);
+  // @include mat.sidenav-color($meals-app-dark-theme);
+
+  // app components
   @include recipe-card.color-dark($meals-app-dark-theme);
   @include footer.color-dark($meals-app-dark-theme);
   @include record-card.color-dark($meals-app-dark-theme);
