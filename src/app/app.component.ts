@@ -1,7 +1,18 @@
-import { Component, HostBinding, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  OnDestroy,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { MediaMatcher } from '@angular/cdk/layout';
+import {
+  MediaMatcher,
+  BreakpointObserver,
+  Breakpoints,
+} from '@angular/cdk/layout';
+import { Subject, takeUntil } from 'rxjs';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -16,7 +27,7 @@ import { StateService } from './common/services/state/state.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   @HostBinding('class') get class() {
     return this.darkTheme() ? 'dark-theme' : '';
   }
@@ -25,12 +36,21 @@ export class AppComponent implements OnInit {
   private recordsService = inject(RecordsService);
   private stateService = inject(StateService);
   private mediaMatcher = inject(MediaMatcher);
+  private breakpointObserver = inject(BreakpointObserver);
 
   get darkTheme() {
     return this.stateService.darkTheme;
   }
+  get isMobile() {
+    return this.stateService.isMobile;
+  }
+  get loading() {
+    return this.loaderService.loading;
+  }
 
   title = 'meals-app';
+
+  destroyed = new Subject<void>();
 
   constructor() {
     const theme = localStorage.getItem('theme');
@@ -45,13 +65,25 @@ export class AppComponent implements OnInit {
         '#ffc8b7'
       );
     }
+
+    this.breakpointObserver
+      .observe([Breakpoints.XSmall])
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((result) => {
+        if (result.matches) {
+          this.isMobile.set(true);
+        } else {
+          this.isMobile.set(false);
+        }
+      });
   }
 
   ngOnInit(): void {
     if (localStorage.getItem('accessToken')) {
       this.recordsService.list().subscribe({
         next: (res) => {
-          this.stateService.records.set(res);
+          this.stateService.records.set(res.data);
+          this.stateService.totalRecords.set(res.count);
         },
         error: (err) => {
           console.log(err);
@@ -60,7 +92,8 @@ export class AppComponent implements OnInit {
     }
   }
 
-  get loading(): boolean {
-    return this.loaderService.loading;
+  ngOnDestroy(): void {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 }

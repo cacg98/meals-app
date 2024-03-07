@@ -18,6 +18,14 @@ export class StateService {
 
   darkTheme: WritableSignal<boolean> = signal(false);
 
+  isMobile: WritableSignal<boolean> = signal(false);
+
+  recordsPage: WritableSignal<number> = signal(0);
+
+  recordsSize: WritableSignal<number> = signal(5);
+
+  totalRecords: WritableSignal<number> = signal(0);
+
   resetState() {
     this.ingredients.set([]);
     this.recipes.set([]);

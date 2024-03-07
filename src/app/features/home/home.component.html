@@ -1,68 +1,87 @@
 <div class="search">
-  <app-ingredients-input [ingredients]="ingredients()" (ingredientsChange)="ingredients.set($event)" />
-  <button mat-stroked-button color="accent" [disabled]="!ingredients().length" (click)="search()">Buscar</button>
+  <app-ingredients-input
+    [ingredients]="ingredients()"
+    (ingredientsChange)="ingredients.set($event)"
+  />
+  <button
+    mat-stroked-button
+    color="accent"
+    [disabled]="!ingredients().length"
+    (click)="search()"
+  >
+    Buscar
+  </button>
 </div>
 
 @if (recipes().length) {
-  <swiper
-    #swiper
-    [config]="config"
-    [effect]="'cards'"
-    (afterInit)="afterInitSwiper()"
-    (slideChange)="onSlideChange($event)"
-  >
-    @for (recipe of recipes(); track recipe.name; let i = $index) {
-      <ng-template swiperSlide>
-        <app-recipe-card [recipe]="recipe" />
-      </ng-template>
-    }
-  </swiper>
+<swiper
+  #swiper
+  [config]="config"
+  [effect]="'cards'"
+  (afterInit)="afterInitSwiper()"
+  (slideChange)="onSlideChange($event)"
+>
+  @for (recipe of recipes(); track recipe.name; let i = $index) {
+  <ng-template swiperSlide>
+    <app-recipe-card [recipe]="recipe" />
+  </ng-template>
+  }
+</swiper>
 } @else {
-  <div class="container-placeholder">
-    @if (firstSearch) {
-      <span class="title contrast-color">¡Encuentra todo tipo de recetas!</span>
-      <img class="placeholder-img" src="assets\images\chefs.png" alt="">
-    } @else if (loading) {
-      @if (darkTheme) {
-        <img class="placeholder-gif" src="assets\images\loading-white.gif" alt="">
-      } @else {
-        <img class="placeholder-gif" src="assets\images\loading-black.gif" alt="">
-      }
-    } @else {
-      @if (darkTheme) {
-        <img class="placeholder-gif" src="assets\images\not-found-white.gif" alt="">
-      } @else {
-        <img class="placeholder-gif" src="assets\images\not-found-black.gif" alt="">
-      }
-      <p style="text-align: center; margin-bottom: 0;">No se encontraron recetas</p>      
-    }
-  </div>
+<div class="container-placeholder">
+  @if (firstSearch) {
+  <span class="title contrast-color">¡Encuentra todo tipo de recetas!</span>
+  <img class="placeholder-img" src="assets\images\chefs.png" alt="" />
+  } @else if (loading) { @if (darkTheme) {
+  <img class="placeholder-gif" src="assets\images\loading-white.gif" alt="" />
+  } @else {
+  <img class="placeholder-gif" src="assets\images\loading-black.gif" alt="" />
+  } } @else { @if (darkTheme) {
+  <img class="placeholder-gif" src="assets\images\not-found-white.gif" alt="" />
+  } @else {
+  <img class="placeholder-gif" src="assets\images\not-found-black.gif" alt="" />
+  }
+  <p style="text-align: center; margin-bottom: 0">No se encontraron recetas</p>
+  }
+</div>
 }
 
 <p class="section-title contrast-color">Últimas 10 búsquedas</p>
 
-<!-- TODO paginar records -->
-
 @if (records().length) {
-  <div class="items-grid">
-    @for (record of records(); track record._id) {
-  
-      <!-- TODO componentizar record-card -->
-  
-      <div matRipple class="record-card" (click)="searchRecord(record.ingredients)">
-        <img [src]="recipeImg(record.image)" alt="">
-        <div class="chips-container">
-          @for (ingredient of record.ingredients; track ingredient) {
-            <span class="chip">{{ingredient}}</span>
-          }
-        </div>
-        <span class="date">{{ record.date | date:'short' }}</span>
-      </div>
-    }
+<div class="items-grid">
+  @for (record of records(); track record._id) {
+
+  <!-- TODO componentizar record-card -->
+
+  <div matRipple class="record-card" (click)="searchRecord(record.ingredients)">
+    <img [src]="recipeImg(record.image)" alt="" />
+    <div class="chips-container">
+      @for (ingredient of record.ingredients; track ingredient) {
+      <span class="chip">{{ ingredient }}</span>
+      }
+    </div>
+    <span class="date">{{ record.date | date : "short" }}</span>
   </div>
+  }
+</div>
 } @else {
-  <div class="container-placeholder">
-    <span class="title contrast-color" style="top: 3rem;">Aún no has buscado recetas</span>
-    <img class="placeholder-img" src="assets\images\books.png" alt="">
-  </div>
+<div class="container-placeholder">
+  <span class="title contrast-color" style="top: 3rem"
+    >Aún no has buscado recetas</span
+  >
+  <img class="placeholder-img" src="assets\images\books.png" alt="" />
+</div>
 }
+
+<mat-paginator
+  color="accent"
+  [length]="totalRecords()"
+  [pageIndex]="page()"
+  [pageSize]="size()"
+  [pageSizeOptions]="[5, 10, 20]"
+  [showFirstLastButtons]="!isMobile"
+  aria-label="Select page"
+  (page)="paginatorChange($event)"
+>
+</mat-paginator>

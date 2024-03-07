@@ -109,7 +109,7 @@ export default class LoginComponent {
           this.router.navigateByUrl('home');
           this.recordsService.list().subscribe({
             next: (res) => {
-              this.stateService.records.set(res);
+              this.stateService.records.set(res.data);
             },
             error: (err) => {
               console.log(err);

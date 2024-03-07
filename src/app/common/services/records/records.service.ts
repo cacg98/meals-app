@@ -4,16 +4,25 @@ import * as recordsEndpoints from '../../endpoints/records';
 import * as recordsResponses from '../../interfaces/records-responses';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecordsService {
   private _httpClient = inject(HttpClient);
-  
-  list() {
-	  return this._httpClient.get<recordsResponses.IRecord[]>(recordsEndpoints.LIST);
+
+  list(page: number = 0, size: number = 5) {
+    return this._httpClient.get<{
+      data: recordsResponses.IRecord[];
+      count: number;
+    }>(`${recordsEndpoints.LIST}?page=${page}&size=${size}`);
   }
 
-  createOrUpdate(ingredients: string[], image: string) {
-	  return this._httpClient.post<recordsResponses.IRecord[]>(recordsEndpoints.CREATE_OR_UPDATE, { ingredients, image });
+  createOrUpdate(ingredients: string[], image: string, size: number = 5) {
+    return this._httpClient.post<{
+      data: recordsResponses.IRecord[];
+      count: number;
+    }>(`${recordsEndpoints.CREATE_OR_UPDATE}?size=${size}`, {
+      ingredients,
+      image,
+    });
   }
 }

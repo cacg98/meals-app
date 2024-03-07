@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
+import {
+  MatPaginatorIntl,
+  MatPaginatorModule,
+  PageEvent,
+} from '@angular/material/paginator';
 
 import { environment } from '../../../environments/environment';
 import { IngredientsInputComponent } from '../../common/components/ingredients-input/ingredients-input.component';
@@ -20,6 +25,7 @@ import SwiperCore, {
   SwiperOptions,
 } from 'swiper';
 import { RecipeCardComponent } from '../../common/components/recipe-card/recipe-card.component';
+import { CustomPaginatorIntl } from '../../common/utils/custom-paginator-intl';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, EffectCards]);
@@ -31,10 +37,12 @@ SwiperCore.use([Navigation, Pagination, EffectCards]);
     CommonModule,
     MatButtonModule,
     MatRippleModule,
+    MatPaginatorModule,
     SwiperModule,
     IngredientsInputComponent,
     RecipeCardComponent,
   ],
+  providers: [{ provide: MatPaginatorIntl, useClass: CustomPaginatorIntl }],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -59,6 +67,18 @@ export default class HomeComponent {
   }
   get darkTheme() {
     return this.stateService.darkTheme();
+  }
+  get isMobile() {
+    return this.stateService.isMobile();
+  }
+  get page() {
+    return this.stateService.recordsPage;
+  }
+  get size() {
+    return this.stateService.recordsSize;
+  }
+  get totalRecords() {
+    return this.stateService.totalRecords;
   }
 
   config: SwiperOptions = {
@@ -93,11 +113,14 @@ export default class HomeComponent {
           this.loading = false;
           this.activeIndex.set(0);
           if (res.length) {
+            // TODO separar listado del createOrUpdate
             this.recordsService
-              .createOrUpdate(this.ingredients(), res[0].image)
+              .createOrUpdate(this.ingredients(), res[0].image, this.size())
               .subscribe({
                 next: (res) => {
-                  this.records.set(res);
+                  this.records.set(res.data);
+                  this.totalRecords.set(res.count);
+                  this.page.set(0);
                 },
                 error: (err) => {
                   console.log(err);
@@ -113,11 +136,26 @@ export default class HomeComponent {
   }
 
   searchRecord(ingredients: string[]) {
+    // TODO al hacer click scrollear al principio
     this.ingredients.set(ingredients);
     this.search();
   }
 
   recipeImg(path: string): string {
     return environment.nestleUrl + path;
+  }
+
+  paginatorChange(e: PageEvent) {
+    this.page.set(e.pageIndex);
+    this.size.set(e.pageSize);
+    this.recordsService.list(this.page(), this.size()).subscribe({
+      next: (res) => {
+        this.records.set(res.data);
+        this.totalRecords.set(res.count);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }
