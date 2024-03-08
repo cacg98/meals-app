@@ -1,4 +1,4 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EMPTY, switchMap } from 'rxjs';
 
@@ -48,7 +48,8 @@ SwiperCore.use([Navigation, Pagination, EffectCards]);
   styleUrl: './home.component.scss',
 })
 export default class HomeComponent {
-  @ViewChild('swiper', { static: false }) swiper?: SwiperComponent;
+  @ViewChild('swiper', { static: false }) swiper!: SwiperComponent;
+  @ViewChild('searchRef') searchRef!: ElementRef;
 
   private mealsService = inject(MealsService);
   private stateService = inject(StateService);
@@ -94,7 +95,7 @@ export default class HomeComponent {
   afterInitSwiper() {
     if (this.activeIndex() == 0) return;
     setTimeout(() => {
-      this.swiper?.swiperRef.slideTo(this.activeIndex(), 0, false);
+      this.swiper.swiperRef.slideTo(this.activeIndex(), 0, false);
     });
   }
 
@@ -142,7 +143,7 @@ export default class HomeComponent {
   }
 
   searchRecord(ingredients: string[]) {
-    // TODO al hacer click scrollear al principio
+    this.searchRef.nativeElement.scrollIntoView({ behavior: 'smooth' });
     this.ingredients.set(ingredients);
     this.search();
   }
