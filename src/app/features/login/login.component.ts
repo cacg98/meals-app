@@ -110,6 +110,7 @@ export default class LoginComponent {
           this.recordsService.list().subscribe({
             next: (res) => {
               this.stateService.records.set(res.data);
+              this.stateService.totalRecords.set(res.count);
             },
             error: (err) => {
               console.log(err);

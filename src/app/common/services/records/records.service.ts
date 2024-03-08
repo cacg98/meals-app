@@ -16,11 +16,8 @@ export class RecordsService {
     }>(`${recordsEndpoints.LIST}?page=${page}&size=${size}`);
   }
 
-  createOrUpdate(ingredients: string[], image: string, size: number = 5) {
-    return this._httpClient.post<{
-      data: recordsResponses.IRecord[];
-      count: number;
-    }>(`${recordsEndpoints.CREATE_OR_UPDATE}?size=${size}`, {
+  createOrUpdate(ingredients: string[], image: string) {
+    return this._httpClient.post<{}>(recordsEndpoints.CREATE_OR_UPDATE, {
       ingredients,
       image,
     });

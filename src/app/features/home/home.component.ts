@@ -1,5 +1,6 @@
 import { Component, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { EMPTY, switchMap } from 'rxjs';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
@@ -105,28 +106,33 @@ export default class HomeComponent {
     if (this.firstSearch) this.firstSearch = false;
     this.loading = true;
     this.recipes.set([]);
+
     this.mealsService
       .searchByIngredients(this.ingredients().join(','))
-      .subscribe({
-        next: (res) => {
+      .pipe(
+        switchMap((res) => {
           this.recipes.set(res);
           this.loading = false;
           this.activeIndex.set(0);
+
           if (res.length) {
-            // TODO separar listado del createOrUpdate
-            this.recordsService
-              .createOrUpdate(this.ingredients(), res[0].image, this.size())
-              .subscribe({
-                next: (res) => {
-                  this.records.set(res.data);
-                  this.totalRecords.set(res.count);
-                  this.page.set(0);
-                },
-                error: (err) => {
-                  console.log(err);
-                },
-              });
+            return this.recordsService.createOrUpdate(
+              this.ingredients(),
+              res[0].image
+            );
+          } else {
+            return EMPTY;
           }
+        }),
+        switchMap(() => {
+          return this.recordsService.list(0, this.size());
+        })
+      )
+      .subscribe({
+        next: (res) => {
+          this.records.set(res.data);
+          this.totalRecords.set(res.count);
+          this.page.set(0);
         },
         error: (err) => {
           console.log(err);

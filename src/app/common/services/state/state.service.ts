@@ -4,10 +4,9 @@ import { IPreviewRecipe } from '../../interfaces/meals-responses';
 import { IRecord } from '../../interfaces/records-responses';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StateService {
-
   ingredients: WritableSignal<string[]> = signal([]);
 
   recipes: WritableSignal<IPreviewRecipe[]> = signal([]);
@@ -31,5 +30,8 @@ export class StateService {
     this.recipes.set([]);
     this.activeIndex.set(0);
     this.records.set([]);
+    this.recordsPage.set(0);
+    this.recordsSize.set(5);
+    this.totalRecords.set(0);
   }
 }
