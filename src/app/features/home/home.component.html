@@ -46,28 +46,36 @@
 </div>
 }
 
-<div class="section-title">
-  <span class="contrast-color">Últimas 10 búsquedas</span>
-  <div class="options">
-    @if (isEnableSelect) {
-    <button
-      color="accent"
-      mat-icon-button
-      aria-label="Delete icon"
-      [disabled]="!recordsIdsSelected.length"
-      (click)="deleteRecords()"
-    >
-      <mat-icon>delete</mat-icon>
-    </button>
-    }
-    <button
-      color="accent"
-      mat-stroked-button
-      (click)="enableSelect()"
-    >
-      {{ isEnableSelect ? "Cancelar" : "Seleccionar" }}
-    </button>
-  </div>
+<p class="section-title contrast-color">Historial de búsquedas</p>
+
+<div class="select-records">
+  @if (isEnableSelect) {
+  <button
+    color="accent"
+    mat-stroked-button
+    [disabled]="!recordsIdsSelected.length"
+    (click)="deleteRecords()"
+  >
+    Eliminar ({{ recordsIdsSelected.length }})
+  </button>
+  } @else {
+  <button
+    color="accent"
+    mat-stroked-button
+    [disabled]="!records().length"
+    (click)="openDialog()"
+  >
+    Eliminar todos
+  </button>
+  }
+  <button
+    color="accent"
+    mat-stroked-button
+    [disabled]="!records().length"
+    (click)="enableSelect()"
+  >
+    {{ isEnableSelect ? "Cancelar" : "Seleccionar" }}
+  </button>
 </div>
 
 @if (records().length) {

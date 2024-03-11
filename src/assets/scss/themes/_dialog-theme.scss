@@ -1,0 +1,22 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@mixin color($theme) {
+  .mdc-dialog__surface {
+    background-color: mat.get-theme-color($theme, background, background);
+  }
+  .mdc-dialog__title,
+  .mdc-dialog__content {
+    color: #000000de !important;
+  }
+}
+
+@mixin color-dark($theme) {
+  .mdc-dialog__surface {
+    background-color: mat.get-theme-color($theme, background, background);
+  }
+  .mdc-dialog__title,
+  .mdc-dialog__content {
+    color: white !important;
+  }
+}

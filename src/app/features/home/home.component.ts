@@ -18,10 +18,12 @@ import {
 } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialog } from '@angular/material/dialog';
 
 import { environment } from '../../../environments/environment';
 import { IngredientsInputComponent } from '../../common/components/ingredients-input/ingredients-input.component';
 import { RecipeCardComponent } from '../../common/components/recipe-card/recipe-card.component';
+import { DeleteDialogComponent } from '../../common/components/delete-dialog/delete-dialog.component';
 import { MealsService } from '../../common/services/meals/meals.service';
 import { StateService } from '../../common/services/state/state.service';
 import { RecordsService } from '../../common/services/records/records.service';
@@ -68,6 +70,7 @@ export default class HomeComponent {
   private mealsService = inject(MealsService);
   private stateService = inject(StateService);
   private recordsService = inject(RecordsService);
+  private dialog = inject(MatDialog);
 
   get ingredients() {
     return this.stateService.ingredients;
@@ -228,5 +231,28 @@ export default class HomeComponent {
           console.log(err);
         },
       });
+  }
+
+  deleteAllRecords() {
+    this.recordsService.deleteAllUserRecords().subscribe({
+      next: () => {
+        this.records.set([]);
+        this.totalRecords.set(0);
+        this.page.set(0);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      data: { count: this.recordsIdsSelected.length },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed', result);
+    });
   }
 }

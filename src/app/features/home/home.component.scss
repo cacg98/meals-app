@@ -98,20 +98,16 @@
 }
 
 .section-title {
+  margin: 2rem;
+  font-size: 1.35rem;
+}
+
+.select-records {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin: 2rem;
-  height: 3rem;
-  span {
-    font-size: 1.35rem;
-  }
-  .options {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: .5rem;
-  }
+  justify-content: flex-end;
+  margin-right: 2rem;
+  gap: .5rem;
 }
 
 @media (min-width: 768px) {

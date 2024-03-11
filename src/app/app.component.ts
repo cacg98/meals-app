@@ -28,6 +28,7 @@ import { StateService } from './common/services/state/state.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, OnDestroy {
+  // TODO pegar clase en el body
   @HostBinding('class') get class() {
     return this.darkTheme() ? 'dark-theme' : '';
   }

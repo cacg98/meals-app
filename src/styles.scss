@@ -6,6 +6,7 @@
 @use "./assets/scss/themes/record-card-theme" as record-card;
 @use "./assets/scss/themes/login-theme" as login;
 @use "./assets/scss/themes/general-theme" as general;
+@use "./assets/scss/themes/dialog-theme" as dialog;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -73,6 +74,7 @@ $meals-app-dark-theme: mat.define-dark-theme(
 @include record-card.color($meals-app-light-theme);
 @include login.color($meals-app-light-theme);
 @include general.color($meals-app-light-theme);
+@include dialog.color($meals-app-light-theme);
 
 .dark-theme {
   @include mat.all-component-colors($meals-app-dark-theme);
@@ -97,6 +99,10 @@ $meals-app-dark-theme: mat.define-dark-theme(
   @include record-card.color-dark($meals-app-dark-theme);
   @include login.color-dark($meals-app-dark-theme);
   @include general.color($meals-app-dark-theme);
+
+  & ~ .cdk-overlay-container {
+    @include dialog.color-dark($meals-app-dark-theme);
+  }
 }
 
 /* You can add global styles to this file, and also import other style files */
