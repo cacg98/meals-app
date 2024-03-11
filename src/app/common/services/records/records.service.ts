@@ -22,4 +22,12 @@ export class RecordsService {
       image,
     });
   }
+
+  deleteRecords(recordsIds: string[]) {
+    return this._httpClient.delete<{}>(`${recordsEndpoints.DELETE}?ids=${recordsIds}`);
+  }
+
+  deleteAllUserRecords() {
+    return this._httpClient.delete<{}>(recordsEndpoints.DELETE_ALL);
+  }
 }

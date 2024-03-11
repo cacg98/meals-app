@@ -46,7 +46,29 @@
 </div>
 }
 
-<p class="section-title contrast-color">Últimas 10 búsquedas</p>
+<div class="section-title">
+  <span class="contrast-color">Últimas 10 búsquedas</span>
+  <div class="options">
+    @if (isEnableSelect) {
+    <button
+      color="accent"
+      mat-icon-button
+      aria-label="Delete icon"
+      [disabled]="!recordsIdsSelected.length"
+      (click)="deleteRecords()"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+    }
+    <button
+      color="accent"
+      mat-stroked-button
+      (click)="enableSelect()"
+    >
+      {{ isEnableSelect ? "Cancelar" : "Seleccionar" }}
+    </button>
+  </div>
+</div>
 
 @if (records().length) {
 <div class="items-grid">
@@ -54,14 +76,34 @@
 
   <!-- TODO componentizar record-card -->
 
-  <div matRipple class="record-card" (click)="searchRecord(record.ingredients)">
-    <img [src]="recipeImg(record.image)" alt="" />
-    <div class="chips-container">
-      @for (ingredient of record.ingredients; track ingredient) {
-      <span class="chip">{{ ingredient }}</span>
-      }
+  <div class="container-record-card">
+    <div
+      matRipple
+      class="record-card"
+      (click)="searchRecord(record.ingredients)"
+    >
+      <img [src]="recipeImg(record.image)" alt="" />
+      <div class="chips-container">
+        @for (ingredient of record.ingredients; track ingredient) {
+        <span class="chip">{{ ingredient }}</span>
+        }
+      </div>
+      <span class="date">{{ record.date | date : "short" }}</span>
     </div>
-    <span class="date">{{ record.date | date : "short" }}</span>
+    @if (isEnableSelect) {
+    <div
+      @fadeInOut
+      class="container-checkbox"
+      (click)="checkbox.toggle(); selectRecords(record._id)"
+    >
+      <mat-checkbox
+        #checkbox
+        [id]="record._id"
+        (click)="$event.stopPropagation()"
+        (change)="selectRecords(record._id)"
+      ></mat-checkbox>
+    </div>
+    }
   </div>
   }
 </div>
