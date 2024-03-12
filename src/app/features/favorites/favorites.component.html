@@ -1,7 +1,7 @@
 @if (recipes.length) {
   <div class="items-grid">
     @for (recipe of recipes; track $index) {
-    <app-recipe-card [recipe]="recipe" />
+    <app-recipe-card class="favorite-card" [recipe]="recipe" />
     }
   </div>
 } @else {
