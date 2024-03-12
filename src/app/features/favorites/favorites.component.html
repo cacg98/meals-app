@@ -4,6 +4,11 @@
     <app-recipe-card class="favorite-card" [recipe]="recipe" />
     }
   </div>
+  @if (showingLoadingMore) {
+    <div class="container-spinner" appLoadMore (isInViewport)="loadMore()">
+      <mat-spinner [diameter]="25"></mat-spinner>
+    </div>
+  }
 } @else {
   <div class="container-empty">
     <span class="title">Aún no tienes favoritos</span>

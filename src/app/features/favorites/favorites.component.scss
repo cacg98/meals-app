@@ -1,5 +1,9 @@
 @import "../../../assets/scss/variables.scss";
 
+:host {
+  display: flow-root;
+}
+
 .container-empty {
   display: flex;
   flex-direction: column;
@@ -15,4 +19,10 @@
     width: 50%;
     object-fit: contain;
   }
+}
+
+.container-spinner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
