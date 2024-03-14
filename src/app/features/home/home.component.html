@@ -54,7 +54,7 @@
     color="accent"
     mat-stroked-button
     [disabled]="!recordsIdsSelected.length"
-    (click)="deleteRecords()"
+    (click)="openDeleteDialog()"
   >
     Eliminar ({{ recordsIdsSelected.length }})
   </button>
@@ -63,7 +63,7 @@
     color="accent"
     mat-stroked-button
     [disabled]="!records().length"
-    (click)="openDialog()"
+    (click)="openDeleteDialog()"
   >
     Eliminar todos
   </button>

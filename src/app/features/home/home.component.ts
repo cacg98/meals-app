@@ -246,13 +246,18 @@ export default class HomeComponent {
     });
   }
 
-  openDialog() {
+  openDeleteDialog() {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: { count: this.recordsIdsSelected.length },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
+      if (!result) return;
+      if (this.recordsIdsSelected.length) {
+        this.deleteRecords();
+      } else {
+        this.deleteAllRecords();
+      }
     });
   }
 }

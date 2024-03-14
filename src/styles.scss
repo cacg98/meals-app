@@ -76,7 +76,8 @@ $meals-app-dark-theme: mat.define-dark-theme(
 @include general.color($meals-app-light-theme);
 @include dialog.color($meals-app-light-theme);
 
-.dark-theme {
+.dark-theme,
+.dark-theme ~ .cdk-overlay-container {
   @include mat.all-component-colors($meals-app-dark-theme);
 
   // material components
@@ -99,10 +100,7 @@ $meals-app-dark-theme: mat.define-dark-theme(
   @include record-card.color-dark($meals-app-dark-theme);
   @include login.color-dark($meals-app-dark-theme);
   @include general.color($meals-app-dark-theme);
-
-  & ~ .cdk-overlay-container {
-    @include dialog.color-dark($meals-app-dark-theme);
-  }
+  @include dialog.color-dark($meals-app-dark-theme);
 }
 
 /* You can add global styles to this file, and also import other style files */
