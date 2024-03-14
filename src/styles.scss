@@ -111,6 +111,9 @@ html,
 body {
   height: 100%;
 }
+html.cdk-global-scrollblock {
+  overflow-y: unset;
+}
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
