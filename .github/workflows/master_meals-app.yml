@@ -21,10 +21,11 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: npm install and build
+      - name: npm install, build, and test
         run: |
           npm install
-          npm run build
+          npm run build --if-present
+          npm run test --if-present
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
@@ -41,9 +42,7 @@ jobs:
     environment:
       name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
-
+    
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
@@ -53,13 +52,6 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
       
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.__clientidsecretname__ }}
-          tenant-id: ${{ secrets.__tenantidsecretname__ }}
-          subscription-id: ${{ secrets.__subscriptionidsecretname__ }}
-
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
@@ -67,3 +59,4 @@ jobs:
           app-name: 'meals-app'
           slot-name: 'production'
           package: .
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_9f218bf65d4b44e1a049a74a8a906d76 }}
