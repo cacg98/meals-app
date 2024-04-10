@@ -22,8 +22,7 @@ FROM nginx:alpine
 # Copy the built Angular app from the builder stage to nginx html directory
 COPY --from=builder /app/dist/meals-app/browser /usr/share/nginx/html
 
+COPY nginx.conf /etc/nginx/nginx.conf
+
 # Expose port 80 to the outside world
 EXPOSE 80
-
-# Start nginx server
-CMD ["nginx", "-g", "daemon off;"]
