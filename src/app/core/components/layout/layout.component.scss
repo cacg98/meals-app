@@ -29,11 +29,14 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  p {
-    margin: 0 0 0.5rem;
+  .contact-info {
+    display: flex;
+    justify-content: end;
+    gap: 0.5rem;
+    margin: 2rem 1rem 0;
   }
-  p:last-child {
-    margin: 2rem 0 0;
+  p {
+    margin: 2rem 0 1rem;
   }
 }
 
@@ -43,5 +46,11 @@ footer {
   }
   .container-body {
     min-height: calc(100vh - var(--mat-toolbar-mobile-height) - $footer-height);
+  }
+}
+
+:host::ng-deep {
+  .mdc-button__label {
+    display: inline-flex;
   }
 }
