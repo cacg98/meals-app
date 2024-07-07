@@ -49,7 +49,7 @@ export default class LoginComponent {
 
   profileForm = this.formBuilder.nonNullable.group({
     email: [
-      'cacg98@gmail.com',
+      '',
       [
         Validators.required,
         // custom email validator
@@ -59,7 +59,7 @@ export default class LoginComponent {
         },
       ],
     ],
-    password: ['123456', Validators.required],
+    password: ['', Validators.required],
   });
 
   get email() {
