@@ -5,7 +5,7 @@
         <mat-label>Correo electrónico</mat-label>
         <input type="email" matInput formControlName="email" />
         @if (email!.invalid) {
-        <mat-error>{{ getErrorMessage() }}</mat-error>
+        <mat-error>{{ getEmailErrorMessage() }}</mat-error>
         }
       </mat-form-field>
       <mat-form-field color="accent">
@@ -27,7 +27,7 @@
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
         @if (password!.invalid) {
-        <mat-error>{{ getErrorMessage() }}</mat-error>
+        <mat-error>Debe ingresar un valor</mat-error>
         }
       </mat-form-field>
       <button
@@ -44,7 +44,6 @@
         [(ngModel)]="isSignUp"
         name="sign"
         aria-label="Sign"
-        (change)="changeForm()"
       >
         <mat-button-toggle [value]="true">Registrarse</mat-button-toggle>
         <mat-button-toggle [value]="false">Iniciar sesión</mat-button-toggle>

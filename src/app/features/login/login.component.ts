@@ -133,19 +133,11 @@ export default class LoginComponent {
     });
   }
 
-  getErrorMessage() {
+  getEmailErrorMessage() {
     if (this.email!.hasError('required')) {
       return 'Debe ingresar un valor';
     }
 
     return this.email!.hasError('errorEmail') ? 'Correo electrónico inválido' : '';
-  }
-
-  changeForm() {
-    if (this.isSignUp) {
-      this.profileForm.setValue({ email: '', password: '' });
-    } else {
-      this.profileForm.reset();
-    }
   }
 }
