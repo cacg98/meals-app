@@ -1,8 +1,9 @@
 export interface IPreviewRecipe {
     anchor: string;
     image: string;
-    info: string[];
     name: string;
+    time: string;
+    difficulty: string;
 }
 
 export interface IRecipe {

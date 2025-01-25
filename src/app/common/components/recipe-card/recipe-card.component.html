@@ -2,12 +2,16 @@
   <div class="name">{{ recipe.name }}</div>
   <img [src]="recipeImg(recipe.image)" alt="" />
   <div class="info">
-    @for (item of recipe.info; track $index) {
+    @if (recipe.time) {
       <div class="item">
-        <span class="title">{{
-          item.includes("min") ? "Tiempo" : "Dificultad"
-        }}</span>
-        <span>{{ item }}</span>
+        <span class="title">Tiempo</span>
+        <span>{{ recipe.time }} min</span>
+      </div>
+    }
+    @if (recipe.time) {
+      <div class="item">
+        <span class="title">Dificultad</span>
+        <span>{{ recipe.difficulty }}</span>
       </div>
     }
   </div>

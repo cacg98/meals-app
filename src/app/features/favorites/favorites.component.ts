@@ -34,16 +34,13 @@ export default class FavoritesComponent implements OnInit {
   }
 
   mapFavoriteToRecipe(favorites: IFavorite[]): IPreviewRecipe[] {
-    // TODO crear mapper
     return favorites.map((favorite) => {
-      const info = [];
-      if (favorite.difficulty) info.push(favorite.difficulty);
-      if (favorite.time) info.push(favorite.time);
       return {
         anchor: favorite.anchor,
         image: favorite.image,
         name: favorite.name,
-        info: info,
+        time: favorite.time,
+        difficulty: favorite.difficulty,
       };
     });
   }
